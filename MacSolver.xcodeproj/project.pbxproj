@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2479FC219AE3CA200E07CE6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FC119AE3CA200E07CE6 /* main.m */; };
+		C2479FC519AE3CA200E07CE6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FC419AE3CA200E07CE6 /* AppDelegate.m */; };
+		C2479FC719AE3CA200E07CE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2479FC619AE3CA200E07CE6 /* Images.xcassets */; };
+		C2479FCA19AE3CA200E07CE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FC819AE3CA200E07CE6 /* MainMenu.xib */; };
+		C2479FD619AE3CA200E07CE6 /* MacSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */; };
+		C2479FE019AE454900E07CE6 /* ScratchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */; };
+		C2479FE319AE462D00E07CE6 /* ScratchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */; };
+		C2479FE719AE474F00E07CE6 /* ModelEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */; };
+		C2479FE819AE474F00E07CE6 /* ModelEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */; };
+		C2479FED19AE484D00E07CE6 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */; };
+		C2479FEE19AE484D00E07CE6 /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FEC19AE484D00E07CE6 /* ResultsView.xib */; };
+		C2479FF719AE5A1200E07CE6 /* liblpsolve55.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C2479FD019AE3CA200E07CE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2479FB419AE3CA200E07CE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2479FBB19AE3CA200E07CE6;
+			remoteInfo = MacSolver;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C2479FBC19AE3CA200E07CE6 /* MacSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2479FC019AE3CA200E07CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2479FC119AE3CA200E07CE6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C2479FC319AE3CA200E07CE6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C2479FC419AE3CA200E07CE6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C2479FC619AE3CA200E07CE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C2479FC919AE3CA200E07CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2479FD419AE3CA200E07CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacSolverTests.m; sourceTree = "<group>"; };
+		C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScratchWindow.xib; sourceTree = "<group>"; };
+		C2479FE119AE462D00E07CE6 /* ScratchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchWindowController.h; sourceTree = "<group>"; };
+		C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchWindowController.m; sourceTree = "<group>"; };
+		C2479FE419AE474F00E07CE6 /* ModelEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntryViewController.h; sourceTree = "<group>"; };
+		C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEntryViewController.m; sourceTree = "<group>"; };
+		C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelEntryView.xib; sourceTree = "<group>"; };
+		C2479FEA19AE484D00E07CE6 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		C2479FEC19AE484D00E07CE6 /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
+		C2479FEF19AE5A1200E07CE6 /* lp_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_utils.h; sourceTree = "<group>"; };
+		C2479FF019AE5A1200E07CE6 /* lp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_types.h; sourceTree = "<group>"; };
+		C2479FF119AE5A1200E07CE6 /* lp_Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_Hash.h; sourceTree = "<group>"; };
+		C2479FF219AE5A1200E07CE6 /* lp_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_matrix.h; sourceTree = "<group>"; };
+		C2479FF319AE5A1200E07CE6 /* lp_SOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_SOS.h; sourceTree = "<group>"; };
+		C2479FF419AE5A1200E07CE6 /* lp_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_lib.h; sourceTree = "<group>"; };
+		C2479FF519AE5A1200E07CE6 /* lp_mipbb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_mipbb.h; sourceTree = "<group>"; };
+		C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblpsolve55.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C2479FB919AE3CA200E07CE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2479FF719AE5A1200E07CE6 /* liblpsolve55.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2479FCC19AE3CA200E07CE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2479FB319AE3CA200E07CE6 = {
+			isa = PBXGroup;
+			children = (
+				C2479FBE19AE3CA200E07CE6 /* MacSolver */,
+				C2479FE919AE47D200E07CE6 /* Resources */,
+				C2479FD219AE3CA200E07CE6 /* MacSolverTests */,
+				C2479FBD19AE3CA200E07CE6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2479FBD19AE3CA200E07CE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FBC19AE3CA200E07CE6 /* MacSolver.app */,
+				C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2479FBE19AE3CA200E07CE6 /* MacSolver */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FF819AE5A1D00E07CE6 /* lp_solve Lib */,
+				C2479FC319AE3CA200E07CE6 /* AppDelegate.h */,
+				C2479FC419AE3CA200E07CE6 /* AppDelegate.m */,
+				C2479FC619AE3CA200E07CE6 /* Images.xcassets */,
+				C2479FE119AE462D00E07CE6 /* ScratchWindowController.h */,
+				C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */,
+				C2479FEA19AE484D00E07CE6 /* ResultsViewController.h */,
+				C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */,
+				C2479FE419AE474F00E07CE6 /* ModelEntryViewController.h */,
+				C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */,
+				C2479FBF19AE3CA200E07CE6 /* Supporting Files */,
+			);
+			path = MacSolver;
+			sourceTree = "<group>";
+		};
+		C2479FBF19AE3CA200E07CE6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FC019AE3CA200E07CE6 /* Info.plist */,
+				C2479FC119AE3CA200E07CE6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2479FD219AE3CA200E07CE6 /* MacSolverTests */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */,
+				C2479FD319AE3CA200E07CE6 /* Supporting Files */,
+			);
+			path = MacSolverTests;
+			sourceTree = "<group>";
+		};
+		C2479FD319AE3CA200E07CE6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FD419AE3CA200E07CE6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2479FE919AE47D200E07CE6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */,
+				C2479FEC19AE484D00E07CE6 /* ResultsView.xib */,
+				C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */,
+				C2479FC819AE3CA200E07CE6 /* MainMenu.xib */,
+			);
+			name = Resources;
+			path = MacSolver;
+			sourceTree = "<group>";
+		};
+		C2479FF819AE5A1D00E07CE6 /* lp_solve Lib */ = {
+			isa = PBXGroup;
+			children = (
+				C2479FEF19AE5A1200E07CE6 /* lp_utils.h */,
+				C2479FF019AE5A1200E07CE6 /* lp_types.h */,
+				C2479FF119AE5A1200E07CE6 /* lp_Hash.h */,
+				C2479FF219AE5A1200E07CE6 /* lp_matrix.h */,
+				C2479FF319AE5A1200E07CE6 /* lp_SOS.h */,
+				C2479FF419AE5A1200E07CE6 /* lp_lib.h */,
+				C2479FF519AE5A1200E07CE6 /* lp_mipbb.h */,
+				C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */,
+			);
+			name = "lp_solve Lib";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C2479FBB19AE3CA200E07CE6 /* MacSolver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2479FD919AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolver" */;
+			buildPhases = (
+				C2479FB819AE3CA200E07CE6 /* Sources */,
+				C2479FB919AE3CA200E07CE6 /* Frameworks */,
+				C2479FBA19AE3CA200E07CE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacSolver;
+			productName = MacSolver;
+			productReference = C2479FBC19AE3CA200E07CE6 /* MacSolver.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C2479FCE19AE3CA200E07CE6 /* MacSolverTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2479FDC19AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolverTests" */;
+			buildPhases = (
+				C2479FCB19AE3CA200E07CE6 /* Sources */,
+				C2479FCC19AE3CA200E07CE6 /* Frameworks */,
+				C2479FCD19AE3CA200E07CE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2479FD119AE3CA200E07CE6 /* PBXTargetDependency */,
+			);
+			name = MacSolverTests;
+			productName = MacSolverTests;
+			productReference = C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C2479FB419AE3CA200E07CE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Chaitanya Gudapati";
+				TargetAttributes = {
+					C2479FBB19AE3CA200E07CE6 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					C2479FCE19AE3CA200E07CE6 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = C2479FBB19AE3CA200E07CE6;
+					};
+				};
+			};
+			buildConfigurationList = C2479FB719AE3CA200E07CE6 /* Build configuration list for PBXProject "MacSolver" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C2479FB319AE3CA200E07CE6;
+			productRefGroup = C2479FBD19AE3CA200E07CE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C2479FBB19AE3CA200E07CE6 /* MacSolver */,
+				C2479FCE19AE3CA200E07CE6 /* MacSolverTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C2479FBA19AE3CA200E07CE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2479FE019AE454900E07CE6 /* ScratchWindow.xib in Resources */,
+				C2479FC719AE3CA200E07CE6 /* Images.xcassets in Resources */,
+				C2479FEE19AE484D00E07CE6 /* ResultsView.xib in Resources */,
+				C2479FCA19AE3CA200E07CE6 /* MainMenu.xib in Resources */,
+				C2479FE819AE474F00E07CE6 /* ModelEntryView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2479FCD19AE3CA200E07CE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C2479FB819AE3CA200E07CE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2479FE319AE462D00E07CE6 /* ScratchWindowController.m in Sources */,
+				C2479FC519AE3CA200E07CE6 /* AppDelegate.m in Sources */,
+				C2479FC219AE3CA200E07CE6 /* main.m in Sources */,
+				C2479FE719AE474F00E07CE6 /* ModelEntryViewController.m in Sources */,
+				C2479FED19AE484D00E07CE6 /* ResultsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2479FCB19AE3CA200E07CE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2479FD619AE3CA200E07CE6 /* MacSolverTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C2479FD119AE3CA200E07CE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2479FBB19AE3CA200E07CE6 /* MacSolver */;
+			targetProxy = C2479FD019AE3CA200E07CE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C2479FC819AE3CA200E07CE6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2479FC919AE3CA200E07CE6 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C2479FD719AE3CA200E07CE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C2479FD819AE3CA200E07CE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C2479FDA19AE3CA200E07CE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MacSolver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacSolver",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C2479FDB19AE3CA200E07CE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MacSolver/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacSolver",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C2479FDD19AE3CA200E07CE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MacSolverTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacSolver.app/Contents/MacOS/MacSolver";
+			};
+			name = Debug;
+		};
+		C2479FDE19AE3CA200E07CE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MacSolverTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacSolver.app/Contents/MacOS/MacSolver";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C2479FB719AE3CA200E07CE6 /* Build configuration list for PBXProject "MacSolver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2479FD719AE3CA200E07CE6 /* Debug */,
+				C2479FD819AE3CA200E07CE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2479FD919AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2479FDA19AE3CA200E07CE6 /* Debug */,
+				C2479FDB19AE3CA200E07CE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2479FDC19AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolverTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2479FDD19AE3CA200E07CE6 /* Debug */,
+				C2479FDE19AE3CA200E07CE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C2479FB419AE3CA200E07CE6 /* Project object */;
+}

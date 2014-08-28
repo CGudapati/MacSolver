@@ -12,6 +12,7 @@
 
 
 @interface ResultsViewController : NSViewController
+@property (weak) IBOutlet NSTextField *optimizedValueLabel;
 
 
 @end

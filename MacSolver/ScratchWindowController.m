@@ -26,6 +26,7 @@ NSString *const kResultsView = @"ResultsView";
 -(void) awakeFromNib{
     [self changeViewController:kModelEntryViewTag];
     [self.backToModelButton setHidden:YES];
+    [self.showResultsButton setEnabled:NO];
 }
 
 
@@ -50,19 +51,15 @@ NSString *const kResultsView = @"ResultsView";
             break;
             
         case kResultsViewtag:
-            NSLog(@"Results view might come");
             if (self.myResultsViewController == nil) {
                 self.myResultsViewController = [[ResultsViewController alloc] initWithNibName:kResultsView bundle:nil];
             }
             self.myScratchViewController = self.myResultsViewController;
-            NSLog(@"ResultsViewLoaded");
             
     }
     
     [self.scratchView addSubview: [self.myScratchViewController view]];
-    NSLog(@"Change successfully completed");
     [[self.myScratchViewController view] setFrame:[self.scratchView bounds]];
-    NSLog(@"Change successfully completed");
     
     
 }
@@ -103,6 +100,7 @@ NSString *const kResultsView = @"ResultsView";
         NSLog(@"Unable to create LP");
         self.returnValue = 1;
     }
+
     
     NSLog(@"What Ho!");
     int rows = get_Nrows(lp);
@@ -112,6 +110,9 @@ NSString *const kResultsView = @"ResultsView";
     REAL pv[indexOfArray];
     
     self.returnValue = solve(lp);
+    if (self.returnValue == 0) {
+        [self.showResultsButton setEnabled:YES];
+    }
     get_primal_solution(lp, pv);
     
     for (int i = 0; i < indexOfArray; ++i) {
@@ -126,12 +127,10 @@ NSString *const kResultsView = @"ResultsView";
 
 - (IBAction)showResults:(NSButton *)sender {
     [self changeViewController:[sender tag]];
-    
     [self.solveButton setHidden:YES];
-    
     [self.showResultsButton setHidden:YES];
-    
     [self.backToModelButton setHidden:NO];
+    [self.myResultsViewController.optimizedValueLabel setStringValue:[NSString stringWithFormat:@"%0.3f", self.optimizedValue]];
     
 }
 

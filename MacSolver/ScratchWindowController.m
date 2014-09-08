@@ -2,8 +2,8 @@
 //  ScratchWindowController.m
 //  MacSolver
 //
-//  Created by Gudapati Naga Venkata Chaitanya
-//  Copyright (c) 2014 Chaitanya Gudapati. All rights reserved.
+//  Created by Venkat on 08/09/14.
+//  Copyright (c) 2014 Gudapati Naga Venkata Chaitanya. All rights reserved.
 //
 
 #import "ScratchWindowController.h"
@@ -11,7 +11,9 @@
 #import "ResultsViewController.h"
 #include "lp_lib.h"
 
+@interface ScratchWindowController ()
 
+@end
 
 @implementation ScratchWindowController
 
@@ -19,7 +21,6 @@ enum   {
     kModelEntryViewTag = 0,
     kResultsViewtag
 };
-
 NSString *const kModelEntryView = @"ModelEntryView";
 NSString *const kResultsView = @"ResultsView";
 
@@ -28,7 +29,6 @@ NSString *const kResultsView = @"ResultsView";
     [self.backToModelButton setHidden:YES];
     [self.showResultsButton setEnabled:NO];
 }
-
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -64,16 +64,16 @@ NSString *const kResultsView = @"ResultsView";
     
 }
 
+
 - (IBAction)solve:(NSButton *)sender {
-    
     NSString *prefixString = @"MyFilename";
     NSString *modelFileExtension = @".lp";
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString] ;
     NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@%@", prefixString, guid,modelFileExtension];
     NSLog(@"uniqueFileName: '%@'", uniqueFileName);
-    
+    NSLog(@"What Ho!");
     NSString *loadedModelTemp = [[self.myModelEntryViewController.textField textStorage] string];
-    
+    NSLog(@"What Ho!");
     NSURL *directoryURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] isDirectory:YES];
     [[NSFileManager defaultManager] createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:nil];
     
@@ -92,7 +92,8 @@ NSString *const kResultsView = @"ResultsView";
     
     NSLog(@"%@", filePathModified);
     
-    const char *cFilePath = [filePathModified UTF8String];
+    const char *constCFilePath = [filePathModified UTF8String];
+    char * cFilePath = strdup(constCFilePath);
     
     lp = read_LP( cFilePath, NORMAL, "test model");
     
@@ -100,7 +101,7 @@ NSString *const kResultsView = @"ResultsView";
         NSLog(@"Unable to create LP");
         self.returnValue = 1;
     }
-
+    
     
     NSLog(@"What Ho!");
     int rows = get_Nrows(lp);
@@ -121,8 +122,7 @@ NSString *const kResultsView = @"ResultsView";
     
     self.optimizedValue = pv[0];
     NSLog(@"The optimized value is %f", self.optimizedValue);
-    
-    
+
 }
 
 - (IBAction)showResults:(NSButton *)sender {
@@ -131,9 +131,7 @@ NSString *const kResultsView = @"ResultsView";
     [self.showResultsButton setHidden:YES];
     [self.backToModelButton setHidden:NO];
     [self.myResultsViewController.optimizedValueLabel setStringValue:[NSString stringWithFormat:@"%0.3f", self.optimizedValue]];
-    
 }
-
 
 - (IBAction)backToModel:(NSButton *)sender {
     [self changeViewController:[sender tag]];

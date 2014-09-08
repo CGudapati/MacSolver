@@ -2,8 +2,8 @@
 //  main.m
 //  MacSolver
 //
-//  Created by Gudapati Naga Venkata Chaitanya on 27/08/14.
-//  Copyright (c) 2014 Chaitanya Gudapati. All rights reserved.
+//  Created by Venkat on 07/09/14.
+//  Copyright (c) 2014 Gudapati Naga Venkata Chaitanya. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

@@ -2,8 +2,8 @@
 //  ModelEntryViewController.h
 //  MacSolver
 //
-//  Created by Gudapati Naga Venkata Chaitanya
-//  Copyright (c) 2014 Chaitanya Gudapati. All rights reserved.
+//  Created by Venkat on 08/09/14.
+//  Copyright (c) 2014 Gudapati Naga Venkata Chaitanya. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

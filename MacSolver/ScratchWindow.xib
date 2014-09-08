@@ -1,66 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A329r" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.8"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.9"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ScratchWindowController">
             <connections>
-                <outlet property="backToModelButton" destination="sDe-UT-Oyw" id="uyx-e0-eEg"/>
-                <outlet property="scratchView" destination="e0e-f8-m9V" id="Q97-3N-Yqu"/>
-                <outlet property="showResultsButton" destination="ZRz-8M-y2c" id="arH-QW-yD0"/>
-                <outlet property="solveButton" destination="rBY-11-FTg" id="8Kp-yu-FbO"/>
+                <outlet property="backToModelButton" destination="Zv2-aY-I5c" id="PUE-xU-2I2"/>
+                <outlet property="scratchView" destination="7Kj-cj-VHr" id="tZ3-ew-nYO"/>
+                <outlet property="showResultsButton" destination="TZd-tG-8ge" id="8NW-Mg-G9g"/>
+                <outlet property="solveButton" destination="3no-TI-mY6" id="yXp-aX-MDh"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="MacSolver" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="875" height="500"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
-            <value key="minSize" type="size" width="875" height="500"/>
-            <view key="contentView" id="EiT-Mj-1SZ">
+            <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="875" height="500"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0e-f8-m9V">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Kj-cj-VHr">
                         <rect key="frame" x="20" y="65" width="835" height="415"/>
                     </customView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZRz-8M-y2c">
-                        <rect key="frame" x="694" y="13" width="130" height="32"/>
-                        <buttonCell key="cell" type="push" title="Show Results" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TgQ-yu-gcp">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3no-TI-mY6">
+                        <rect key="frame" x="417" y="13" width="75" height="32"/>
+                        <buttonCell key="cell" type="push" title="Solve" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZuF-ZP-XJ1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="showResults:" target="-2" id="1fW-jI-eS4"/>
+                            <action selector="solve:" target="-2" id="Ic4-sb-LhR"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDe-UT-Oyw">
-                        <rect key="frame" x="694" y="13" width="130" height="32"/>
-                        <buttonCell key="cell" type="push" title="Back to model" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P5x-Wr-lbh">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zv2-aY-I5c">
+                        <rect key="frame" x="527" y="13" width="130" height="32"/>
+                        <buttonCell key="cell" type="push" title="Back to Model" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jyX-t0-nco">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="backToModel:" target="-2" id="6Hc-yu-BbK"/>
+                            <action selector="backToModel:" target="-2" id="49m-1S-xA6"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBY-11-FTg">
-                        <rect key="frame" x="522" y="13" width="75" height="32"/>
-                        <buttonCell key="cell" type="push" title="Solve" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z6Y-lt-uUH">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="TZd-tG-8ge">
+                        <rect key="frame" x="683" y="13" width="125" height="32"/>
+                        <buttonCell key="cell" type="push" title="Show Results" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cAY-Cj-uDJ">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="solve:" target="-2" id="SkO-KF-dED"/>
+                            <action selector="showResults:" target="-2" id="YvG-wD-Mqm"/>
                         </connections>
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="722.5" y="462"/>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="192" y="407"/>
         </window>
     </objects>
 </document>

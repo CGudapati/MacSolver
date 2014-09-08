@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2479FBB19AE3CA200E07CE6"
+               BlueprintIdentifier = "C26B516719BCA22C00D66D5E"
                BuildableName = "MacSolver.app"
                BlueprintName = "MacSolver"
                ReferencedContainer = "container:MacSolver.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2479FCE19AE3CA200E07CE6"
+               BlueprintIdentifier = "C26B517A19BCA22C00D66D5E"
                BuildableName = "MacSolverTests.xctest"
                BlueprintName = "MacSolverTests"
                ReferencedContainer = "container:MacSolver.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C2479FCE19AE3CA200E07CE6"
+               BlueprintIdentifier = "C26B517A19BCA22C00D66D5E"
                BuildableName = "MacSolverTests.xctest"
                BlueprintName = "MacSolverTests"
                ReferencedContainer = "container:MacSolver.xcodeproj">
@@ -56,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C2479FBB19AE3CA200E07CE6"
+            BlueprintIdentifier = "C26B516719BCA22C00D66D5E"
             BuildableName = "MacSolver.app"
             BlueprintName = "MacSolver"
             ReferencedContainer = "container:MacSolver.xcodeproj">
@@ -75,7 +75,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C2479FBB19AE3CA200E07CE6"
+            BlueprintIdentifier = "C26B516719BCA22C00D66D5E"
             BuildableName = "MacSolver.app"
             BlueprintName = "MacSolver"
             ReferencedContainer = "container:MacSolver.xcodeproj">
@@ -93,7 +93,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C2479FBB19AE3CA200E07CE6"
+            BlueprintIdentifier = "C26B516719BCA22C00D66D5E"
             BuildableName = "MacSolver.app"
             BlueprintName = "MacSolver"
             ReferencedContainer = "container:MacSolver.xcodeproj">

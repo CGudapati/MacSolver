@@ -7,70 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C2479FC219AE3CA200E07CE6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FC119AE3CA200E07CE6 /* main.m */; };
-		C2479FC519AE3CA200E07CE6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FC419AE3CA200E07CE6 /* AppDelegate.m */; };
-		C2479FC719AE3CA200E07CE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2479FC619AE3CA200E07CE6 /* Images.xcassets */; };
-		C2479FCA19AE3CA200E07CE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FC819AE3CA200E07CE6 /* MainMenu.xib */; };
-		C2479FD619AE3CA200E07CE6 /* MacSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */; };
-		C2479FE019AE454900E07CE6 /* ScratchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */; };
-		C2479FE319AE462D00E07CE6 /* ScratchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */; };
-		C2479FE719AE474F00E07CE6 /* ModelEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */; };
-		C2479FE819AE474F00E07CE6 /* ModelEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */; };
-		C2479FED19AE484D00E07CE6 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */; };
-		C2479FEE19AE484D00E07CE6 /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2479FEC19AE484D00E07CE6 /* ResultsView.xib */; };
-		C2479FF719AE5A1200E07CE6 /* liblpsolve55.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */; };
+		C2234E1719BD41F500949E46 /* ModelEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E1519BD41F500949E46 /* ModelEntryViewController.m */; };
+		C2234E1819BD41F500949E46 /* ModelEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E1619BD41F500949E46 /* ModelEntryView.xib */; };
+		C2234E2119BD4A3B00949E46 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */; };
+		C2234E2219BD4A3B00949E46 /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E2019BD4A3B00949E46 /* ResultsView.xib */; };
+		C2234E2619BD4A7D00949E46 /* ScratchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */; };
+		C2234E2719BD4A7D00949E46 /* ScratchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */; };
+		C26B516E19BCA22C00D66D5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B516D19BCA22C00D66D5E /* main.m */; };
+		C26B517119BCA22C00D66D5E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B517019BCA22C00D66D5E /* AppDelegate.m */; };
+		C26B517319BCA22C00D66D5E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C26B517219BCA22C00D66D5E /* Images.xcassets */; };
+		C26B517619BCA22C00D66D5E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26B517419BCA22C00D66D5E /* MainMenu.xib */; };
+		C26B518219BCA22C00D66D5E /* MacSolverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B518119BCA22C00D66D5E /* MacSolverTests.m */; };
+		C2CBD94819BD3176001F1B3D /* liblpsolve55.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CBD94719BD3176001F1B3D /* liblpsolve55.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C2479FD019AE3CA200E07CE6 /* PBXContainerItemProxy */ = {
+		C26B517C19BCA22C00D66D5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C2479FB419AE3CA200E07CE6 /* Project object */;
+			containerPortal = C26B516019BCA22B00D66D5E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C2479FBB19AE3CA200E07CE6;
+			remoteGlobalIDString = C26B516719BCA22C00D66D5E;
 			remoteInfo = MacSolver;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C2479FBC19AE3CA200E07CE6 /* MacSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2479FC019AE3CA200E07CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C2479FC119AE3CA200E07CE6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C2479FC319AE3CA200E07CE6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C2479FC419AE3CA200E07CE6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C2479FC619AE3CA200E07CE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C2479FC919AE3CA200E07CE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2479FD419AE3CA200E07CE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacSolverTests.m; sourceTree = "<group>"; };
-		C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScratchWindow.xib; sourceTree = "<group>"; };
-		C2479FE119AE462D00E07CE6 /* ScratchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchWindowController.h; sourceTree = "<group>"; };
-		C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchWindowController.m; sourceTree = "<group>"; };
-		C2479FE419AE474F00E07CE6 /* ModelEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntryViewController.h; sourceTree = "<group>"; };
-		C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEntryViewController.m; sourceTree = "<group>"; };
-		C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelEntryView.xib; sourceTree = "<group>"; };
-		C2479FEA19AE484D00E07CE6 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
-		C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
-		C2479FEC19AE484D00E07CE6 /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
-		C2479FEF19AE5A1200E07CE6 /* lp_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_utils.h; sourceTree = "<group>"; };
-		C2479FF019AE5A1200E07CE6 /* lp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_types.h; sourceTree = "<group>"; };
-		C2479FF119AE5A1200E07CE6 /* lp_Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_Hash.h; sourceTree = "<group>"; };
-		C2479FF219AE5A1200E07CE6 /* lp_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_matrix.h; sourceTree = "<group>"; };
-		C2479FF319AE5A1200E07CE6 /* lp_SOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_SOS.h; sourceTree = "<group>"; };
-		C2479FF419AE5A1200E07CE6 /* lp_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_lib.h; sourceTree = "<group>"; };
-		C2479FF519AE5A1200E07CE6 /* lp_mipbb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_mipbb.h; sourceTree = "<group>"; };
-		C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblpsolve55.a; sourceTree = "<group>"; };
+		C2234E1419BD41F500949E46 /* ModelEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntryViewController.h; sourceTree = "<group>"; };
+		C2234E1519BD41F500949E46 /* ModelEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEntryViewController.m; sourceTree = "<group>"; };
+		C2234E1619BD41F500949E46 /* ModelEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelEntryView.xib; sourceTree = "<group>"; };
+		C2234E1E19BD4A3B00949E46 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		C2234E2019BD4A3B00949E46 /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
+		C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchWindowController.h; sourceTree = "<group>"; };
+		C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchWindowController.m; sourceTree = "<group>"; };
+		C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScratchWindow.xib; sourceTree = "<group>"; };
+		C26B516819BCA22C00D66D5E /* MacSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C26B516C19BCA22C00D66D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C26B516D19BCA22C00D66D5E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C26B516F19BCA22C00D66D5E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C26B517019BCA22C00D66D5E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C26B517219BCA22C00D66D5E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C26B517519BCA22C00D66D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C26B517B19BCA22C00D66D5E /* MacSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C26B518019BCA22C00D66D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C26B518119BCA22C00D66D5E /* MacSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacSolverTests.m; sourceTree = "<group>"; };
+		C2CBD94019BD3176001F1B3D /* lp_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_utils.h; sourceTree = "<group>"; };
+		C2CBD94119BD3176001F1B3D /* lp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_types.h; sourceTree = "<group>"; };
+		C2CBD94219BD3176001F1B3D /* lp_Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_Hash.h; sourceTree = "<group>"; };
+		C2CBD94319BD3176001F1B3D /* lp_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_matrix.h; sourceTree = "<group>"; };
+		C2CBD94419BD3176001F1B3D /* lp_SOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_SOS.h; sourceTree = "<group>"; };
+		C2CBD94519BD3176001F1B3D /* lp_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_lib.h; sourceTree = "<group>"; };
+		C2CBD94619BD3176001F1B3D /* lp_mipbb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_mipbb.h; sourceTree = "<group>"; };
+		C2CBD94719BD3176001F1B3D /* liblpsolve55.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblpsolve55.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C2479FB919AE3CA200E07CE6 /* Frameworks */ = {
+		C26B516519BCA22C00D66D5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2479FF719AE5A1200E07CE6 /* liblpsolve55.a in Frameworks */,
+				C2CBD94819BD3176001F1B3D /* liblpsolve55.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C2479FCC19AE3CA200E07CE6 /* Frameworks */ = {
+		C26B517819BCA22C00D66D5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,106 +80,106 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C2479FB319AE3CA200E07CE6 = {
+		C26B515F19BCA22B00D66D5E = {
 			isa = PBXGroup;
 			children = (
-				C2479FBE19AE3CA200E07CE6 /* MacSolver */,
-				C2479FE919AE47D200E07CE6 /* Resources */,
-				C2479FD219AE3CA200E07CE6 /* MacSolverTests */,
-				C2479FBD19AE3CA200E07CE6 /* Products */,
+				C26B516A19BCA22C00D66D5E /* MacSolver */,
+				C26B519A19BCBC3700D66D5E /* Resources */,
+				C26B517E19BCA22C00D66D5E /* MacSolverTests */,
+				C26B516919BCA22C00D66D5E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C2479FBD19AE3CA200E07CE6 /* Products */ = {
+		C26B516919BCA22C00D66D5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FBC19AE3CA200E07CE6 /* MacSolver.app */,
-				C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */,
+				C26B516819BCA22C00D66D5E /* MacSolver.app */,
+				C26B517B19BCA22C00D66D5E /* MacSolverTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C2479FBE19AE3CA200E07CE6 /* MacSolver */ = {
+		C26B516A19BCA22C00D66D5E /* MacSolver */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FF819AE5A1D00E07CE6 /* lp_solve Lib */,
-				C2479FC319AE3CA200E07CE6 /* AppDelegate.h */,
-				C2479FC419AE3CA200E07CE6 /* AppDelegate.m */,
-				C2479FC619AE3CA200E07CE6 /* Images.xcassets */,
-				C2479FE119AE462D00E07CE6 /* ScratchWindowController.h */,
-				C2479FE219AE462D00E07CE6 /* ScratchWindowController.m */,
-				C2479FEA19AE484D00E07CE6 /* ResultsViewController.h */,
-				C2479FEB19AE484D00E07CE6 /* ResultsViewController.m */,
-				C2479FE419AE474F00E07CE6 /* ModelEntryViewController.h */,
-				C2479FE519AE474F00E07CE6 /* ModelEntryViewController.m */,
-				C2479FBF19AE3CA200E07CE6 /* Supporting Files */,
+				C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */,
+				C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */,
+				C2234E1E19BD4A3B00949E46 /* ResultsViewController.h */,
+				C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */,
+				C2234E1419BD41F500949E46 /* ModelEntryViewController.h */,
+				C2234E1519BD41F500949E46 /* ModelEntryViewController.m */,
+				C2CBD94A19BD318E001F1B3D /* lp_solve Library */,
+				C26B516F19BCA22C00D66D5E /* AppDelegate.h */,
+				C26B517019BCA22C00D66D5E /* AppDelegate.m */,
+				C26B517219BCA22C00D66D5E /* Images.xcassets */,
+				C26B516B19BCA22C00D66D5E /* Supporting Files */,
 			);
 			path = MacSolver;
 			sourceTree = "<group>";
 		};
-		C2479FBF19AE3CA200E07CE6 /* Supporting Files */ = {
+		C26B516B19BCA22C00D66D5E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FC019AE3CA200E07CE6 /* Info.plist */,
-				C2479FC119AE3CA200E07CE6 /* main.m */,
+				C26B516C19BCA22C00D66D5E /* Info.plist */,
+				C26B516D19BCA22C00D66D5E /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C2479FD219AE3CA200E07CE6 /* MacSolverTests */ = {
+		C26B517E19BCA22C00D66D5E /* MacSolverTests */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FD519AE3CA200E07CE6 /* MacSolverTests.m */,
-				C2479FD319AE3CA200E07CE6 /* Supporting Files */,
+				C26B518119BCA22C00D66D5E /* MacSolverTests.m */,
+				C26B517F19BCA22C00D66D5E /* Supporting Files */,
 			);
 			path = MacSolverTests;
 			sourceTree = "<group>";
 		};
-		C2479FD319AE3CA200E07CE6 /* Supporting Files */ = {
+		C26B517F19BCA22C00D66D5E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FD419AE3CA200E07CE6 /* Info.plist */,
+				C26B518019BCA22C00D66D5E /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C2479FE919AE47D200E07CE6 /* Resources */ = {
+		C26B519A19BCBC3700D66D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FDF19AE454900E07CE6 /* ScratchWindow.xib */,
-				C2479FEC19AE484D00E07CE6 /* ResultsView.xib */,
-				C2479FE619AE474F00E07CE6 /* ModelEntryView.xib */,
-				C2479FC819AE3CA200E07CE6 /* MainMenu.xib */,
+				C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */,
+				C2234E2019BD4A3B00949E46 /* ResultsView.xib */,
+				C2234E1619BD41F500949E46 /* ModelEntryView.xib */,
+				C26B517419BCA22C00D66D5E /* MainMenu.xib */,
 			);
 			name = Resources;
 			path = MacSolver;
 			sourceTree = "<group>";
 		};
-		C2479FF819AE5A1D00E07CE6 /* lp_solve Lib */ = {
+		C2CBD94A19BD318E001F1B3D /* lp_solve Library */ = {
 			isa = PBXGroup;
 			children = (
-				C2479FEF19AE5A1200E07CE6 /* lp_utils.h */,
-				C2479FF019AE5A1200E07CE6 /* lp_types.h */,
-				C2479FF119AE5A1200E07CE6 /* lp_Hash.h */,
-				C2479FF219AE5A1200E07CE6 /* lp_matrix.h */,
-				C2479FF319AE5A1200E07CE6 /* lp_SOS.h */,
-				C2479FF419AE5A1200E07CE6 /* lp_lib.h */,
-				C2479FF519AE5A1200E07CE6 /* lp_mipbb.h */,
-				C2479FF619AE5A1200E07CE6 /* liblpsolve55.a */,
+				C2CBD94019BD3176001F1B3D /* lp_utils.h */,
+				C2CBD94119BD3176001F1B3D /* lp_types.h */,
+				C2CBD94219BD3176001F1B3D /* lp_Hash.h */,
+				C2CBD94319BD3176001F1B3D /* lp_matrix.h */,
+				C2CBD94419BD3176001F1B3D /* lp_SOS.h */,
+				C2CBD94519BD3176001F1B3D /* lp_lib.h */,
+				C2CBD94619BD3176001F1B3D /* lp_mipbb.h */,
+				C2CBD94719BD3176001F1B3D /* liblpsolve55.a */,
 			);
-			name = "lp_solve Lib";
+			name = "lp_solve Library";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C2479FBB19AE3CA200E07CE6 /* MacSolver */ = {
+		C26B516719BCA22C00D66D5E /* MacSolver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2479FD919AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolver" */;
+			buildConfigurationList = C26B518519BCA22C00D66D5E /* Build configuration list for PBXNativeTarget "MacSolver" */;
 			buildPhases = (
-				C2479FB819AE3CA200E07CE6 /* Sources */,
-				C2479FB919AE3CA200E07CE6 /* Frameworks */,
-				C2479FBA19AE3CA200E07CE6 /* Resources */,
+				C26B516419BCA22C00D66D5E /* Sources */,
+				C26B516519BCA22C00D66D5E /* Frameworks */,
+				C26B516619BCA22C00D66D5E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -187,46 +187,46 @@
 			);
 			name = MacSolver;
 			productName = MacSolver;
-			productReference = C2479FBC19AE3CA200E07CE6 /* MacSolver.app */;
+			productReference = C26B516819BCA22C00D66D5E /* MacSolver.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C2479FCE19AE3CA200E07CE6 /* MacSolverTests */ = {
+		C26B517A19BCA22C00D66D5E /* MacSolverTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2479FDC19AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolverTests" */;
+			buildConfigurationList = C26B518819BCA22C00D66D5E /* Build configuration list for PBXNativeTarget "MacSolverTests" */;
 			buildPhases = (
-				C2479FCB19AE3CA200E07CE6 /* Sources */,
-				C2479FCC19AE3CA200E07CE6 /* Frameworks */,
-				C2479FCD19AE3CA200E07CE6 /* Resources */,
+				C26B517719BCA22C00D66D5E /* Sources */,
+				C26B517819BCA22C00D66D5E /* Frameworks */,
+				C26B517919BCA22C00D66D5E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C2479FD119AE3CA200E07CE6 /* PBXTargetDependency */,
+				C26B517D19BCA22C00D66D5E /* PBXTargetDependency */,
 			);
 			name = MacSolverTests;
 			productName = MacSolverTests;
-			productReference = C2479FCF19AE3CA200E07CE6 /* MacSolverTests.xctest */;
+			productReference = C26B517B19BCA22C00D66D5E /* MacSolverTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C2479FB419AE3CA200E07CE6 /* Project object */ = {
+		C26B516019BCA22B00D66D5E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "Chaitanya Gudapati";
+				ORGANIZATIONNAME = "Gudapati Naga Venkata Chaitanya";
 				TargetAttributes = {
-					C2479FBB19AE3CA200E07CE6 = {
+					C26B516719BCA22C00D66D5E = {
 						CreatedOnToolsVersion = 6.0;
 					};
-					C2479FCE19AE3CA200E07CE6 = {
+					C26B517A19BCA22C00D66D5E = {
 						CreatedOnToolsVersion = 6.0;
-						TestTargetID = C2479FBB19AE3CA200E07CE6;
+						TestTargetID = C26B516719BCA22C00D66D5E;
 					};
 				};
 			};
-			buildConfigurationList = C2479FB719AE3CA200E07CE6 /* Build configuration list for PBXProject "MacSolver" */;
+			buildConfigurationList = C26B516319BCA22B00D66D5E /* Build configuration list for PBXProject "MacSolver" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -234,31 +234,31 @@
 				en,
 				Base,
 			);
-			mainGroup = C2479FB319AE3CA200E07CE6;
-			productRefGroup = C2479FBD19AE3CA200E07CE6 /* Products */;
+			mainGroup = C26B515F19BCA22B00D66D5E;
+			productRefGroup = C26B516919BCA22C00D66D5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C2479FBB19AE3CA200E07CE6 /* MacSolver */,
-				C2479FCE19AE3CA200E07CE6 /* MacSolverTests */,
+				C26B516719BCA22C00D66D5E /* MacSolver */,
+				C26B517A19BCA22C00D66D5E /* MacSolverTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C2479FBA19AE3CA200E07CE6 /* Resources */ = {
+		C26B516619BCA22C00D66D5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2479FE019AE454900E07CE6 /* ScratchWindow.xib in Resources */,
-				C2479FC719AE3CA200E07CE6 /* Images.xcassets in Resources */,
-				C2479FEE19AE484D00E07CE6 /* ResultsView.xib in Resources */,
-				C2479FCA19AE3CA200E07CE6 /* MainMenu.xib in Resources */,
-				C2479FE819AE474F00E07CE6 /* ModelEntryView.xib in Resources */,
+				C26B517319BCA22C00D66D5E /* Images.xcassets in Resources */,
+				C26B517619BCA22C00D66D5E /* MainMenu.xib in Resources */,
+				C2234E2219BD4A3B00949E46 /* ResultsView.xib in Resources */,
+				C2234E2719BD4A7D00949E46 /* ScratchWindow.xib in Resources */,
+				C2234E1819BD41F500949E46 /* ModelEntryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C2479FCD19AE3CA200E07CE6 /* Resources */ = {
+		C26B517919BCA22C00D66D5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -268,41 +268,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C2479FB819AE3CA200E07CE6 /* Sources */ = {
+		C26B516419BCA22C00D66D5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2479FE319AE462D00E07CE6 /* ScratchWindowController.m in Sources */,
-				C2479FC519AE3CA200E07CE6 /* AppDelegate.m in Sources */,
-				C2479FC219AE3CA200E07CE6 /* main.m in Sources */,
-				C2479FE719AE474F00E07CE6 /* ModelEntryViewController.m in Sources */,
-				C2479FED19AE484D00E07CE6 /* ResultsViewController.m in Sources */,
+				C26B517119BCA22C00D66D5E /* AppDelegate.m in Sources */,
+				C2234E1719BD41F500949E46 /* ModelEntryViewController.m in Sources */,
+				C26B516E19BCA22C00D66D5E /* main.m in Sources */,
+				C2234E2119BD4A3B00949E46 /* ResultsViewController.m in Sources */,
+				C2234E2619BD4A7D00949E46 /* ScratchWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C2479FCB19AE3CA200E07CE6 /* Sources */ = {
+		C26B517719BCA22C00D66D5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2479FD619AE3CA200E07CE6 /* MacSolverTests.m in Sources */,
+				C26B518219BCA22C00D66D5E /* MacSolverTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C2479FD119AE3CA200E07CE6 /* PBXTargetDependency */ = {
+		C26B517D19BCA22C00D66D5E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C2479FBB19AE3CA200E07CE6 /* MacSolver */;
-			targetProxy = C2479FD019AE3CA200E07CE6 /* PBXContainerItemProxy */;
+			target = C26B516719BCA22C00D66D5E /* MacSolver */;
+			targetProxy = C26B517C19BCA22C00D66D5E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C2479FC819AE3CA200E07CE6 /* MainMenu.xib */ = {
+		C26B517419BCA22C00D66D5E /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C2479FC919AE3CA200E07CE6 /* Base */,
+				C26B517519BCA22C00D66D5E /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C2479FD719AE3CA200E07CE6 /* Debug */ = {
+		C26B518319BCA22C00D66D5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -351,7 +351,7 @@
 			};
 			name = Debug;
 		};
-		C2479FD819AE3CA200E07CE6 /* Release */ = {
+		C26B518419BCA22C00D66D5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -386,7 +386,7 @@
 			};
 			name = Release;
 		};
-		C2479FDA19AE3CA200E07CE6 /* Debug */ = {
+		C26B518619BCA22C00D66D5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -397,12 +397,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacSolver",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		C2479FDB19AE3CA200E07CE6 /* Release */ = {
+		C26B518719BCA22C00D66D5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -413,12 +412,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacSolver",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		C2479FDD19AE3CA200E07CE6 /* Debug */ = {
+		C26B518919BCA22C00D66D5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -438,7 +436,7 @@
 			};
 			name = Debug;
 		};
-		C2479FDE19AE3CA200E07CE6 /* Release */ = {
+		C26B518A19BCA22C00D66D5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -457,34 +455,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C2479FB719AE3CA200E07CE6 /* Build configuration list for PBXProject "MacSolver" */ = {
+		C26B516319BCA22B00D66D5E /* Build configuration list for PBXProject "MacSolver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2479FD719AE3CA200E07CE6 /* Debug */,
-				C2479FD819AE3CA200E07CE6 /* Release */,
+				C26B518319BCA22C00D66D5E /* Debug */,
+				C26B518419BCA22C00D66D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2479FD919AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolver" */ = {
+		C26B518519BCA22C00D66D5E /* Build configuration list for PBXNativeTarget "MacSolver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2479FDA19AE3CA200E07CE6 /* Debug */,
-				C2479FDB19AE3CA200E07CE6 /* Release */,
+				C26B518619BCA22C00D66D5E /* Debug */,
+				C26B518719BCA22C00D66D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2479FDC19AE3CA200E07CE6 /* Build configuration list for PBXNativeTarget "MacSolverTests" */ = {
+		C26B518819BCA22C00D66D5E /* Build configuration list for PBXNativeTarget "MacSolverTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2479FDD19AE3CA200E07CE6 /* Debug */,
-				C2479FDE19AE3CA200E07CE6 /* Release */,
+				C26B518919BCA22C00D66D5E /* Debug */,
+				C26B518A19BCA22C00D66D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C2479FB419AE3CA200E07CE6 /* Project object */;
+	rootObject = C26B516019BCA22B00D66D5E /* Project object */;
 }

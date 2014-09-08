@@ -2,22 +2,28 @@
 //  AppDelegate.m
 //  MacSolver
 //
-//  Created by Gudapati Naga Venkata Chaitanya
-//  Copyright (c) 2014 Chaitanya Gudapati. All rights reserved.
+//  Created by Venkat on 07/09/14.
+//  Copyright (c) 2014 Gudapati Naga Venkata Chaitanya. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "ScratchWindowController.h"
 
-@interface AppDelegate ()
-
-@property (weak) IBOutlet NSWindow *window;
-
-@end
-
 @implementation AppDelegate
-            
-- (void)applicationDidFinishLaunching:(NSNotification *)a{
+
+
+-(IBAction)newDocument:(id)sender
+{
+    if (self.myScratchWindowController == nil)
+    {
+        self.myScratchWindowController = [[ScratchWindowController alloc] initWithWindowNibName:@"ScratchWindow"];
+    }
+    [self.myScratchWindowController showWindow:self];
+}
+
+
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [self newDocument:self];
 }
 
@@ -25,13 +31,14 @@
     // Insert code here to tear down your application
 }
 
-- (IBAction)newDocument:(id)sender
-{
-    if (self.myScratchWindowController == nil)
-    {
-        self.myScratchWindowController = [[ScratchWindowController alloc] initWithWindowNibName:@"ScratchWindow"];
+-(BOOL) validateMenuItem:(NSMenuItem *)menuItem{
+    BOOL enable = [self respondsToSelector:[menuItem action]];
+    if ([menuItem action] == @selector(newDocument:)) {
+        if ([[self.myScratchWindowController window] isKeyWindow]) {
+            enable = NO;
+        }
     }
-    [self.myScratchWindowController showWindow:self];
+    return enable;
 }
 
 @end

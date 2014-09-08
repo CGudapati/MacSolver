@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329r" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A329r" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.8"/>
+        <deployment defaultVersion="101000" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.9"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultsViewController">
             <connections>
-                <outlet property="optimizedValueLabel" destination="spZ-Xf-Yv4" id="ODJ-h8-icy"/>
+                <outlet property="optimizedValueLabel" destination="ra3-9Z-fz5" id="9Hf-pZ-DI1"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -17,25 +17,44 @@
             <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TlA-fH-wkB">
-                    <rect key="frame" x="18" y="362" width="151" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The Optimized value is" id="tcn-Jd-Kwj">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="spZ-Xf-Yv4">
-                    <rect key="frame" x="228" y="362" width="589" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Juv-Va-kV8">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cab-6L-VkF">
+                    <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="Solution" identifier="1" id="sSa-gn-YqV">
+                            <view key="view" ambiguous="YES" id="L8c-zt-U2i">
+                                <rect key="frame" x="10" y="33" width="815" height="369"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pv9-Rs-jop">
+                                        <rect key="frame" x="15" y="301" width="89" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optimal value" id="N9L-DU-Pew">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ra3-9Z-fz5">
+                                        <rect key="frame" x="146" y="301" width="654" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Optimal value" id="V0Y-oh-rzw">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Variables and Constraints" identifier="2" id="e9H-AN-8xt">
+                            <view key="view" id="AQu-60-24P">
+                                <rect key="frame" x="10" y="33" width="815" height="369"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
             </subviews>
-            <point key="canvasLocation" x="147.5" y="333.5"/>
+            <point key="canvasLocation" x="464.5" y="424.5"/>
         </customView>
-        <userDefaultsController representsSharedInstance="YES" id="xwd-EP-1g5"/>
     </objects>
 </document>

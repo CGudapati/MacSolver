@@ -16,21 +16,21 @@
             <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJN-DL-uDU">
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJN-DL-uDU">
                     <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
-                    <clipView key="contentView" ambiguous="YES" misplaced="YES" id="8nP-Kz-Ftc">
+                    <clipView key="contentView" id="8nP-Kz-Ftc">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e9a-Sy-F9r">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                            <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e9a-Sy-F9r">
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="413"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="818" height="413"/>
-                                <size key="maxSize" width="818" height="10000000"/>
+                                <size key="maxSize" width="835" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="818" height="413"/>
-                                <size key="maxSize" width="818" height="10000000"/>
+                                <size key="maxSize" width="835" height="10000000"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,7 +45,13 @@
                     </scroller>
                 </scrollView>
             </subviews>
-            <point key="canvasLocation" x="342.5" y="398.5"/>
+            <constraints>
+                <constraint firstItem="aJN-DL-uDU" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="6eA-su-4Ox"/>
+                <constraint firstItem="aJN-DL-uDU" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="HpP-1Q-c40"/>
+                <constraint firstAttribute="trailing" secondItem="aJN-DL-uDU" secondAttribute="trailing" id="O6c-Nu-gjh"/>
+                <constraint firstAttribute="bottom" secondItem="aJN-DL-uDU" secondAttribute="bottom" id="OTz-oH-dak"/>
+            </constraints>
+            <point key="canvasLocation" x="421.5" y="402.5"/>
         </customView>
     </objects>
 </document>

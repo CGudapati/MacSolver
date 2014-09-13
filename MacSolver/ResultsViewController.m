@@ -2,11 +2,12 @@
 //  ResultsViewController.m
 //  MacSolver
 //
-//  Created by Venkat on 08/09/14.
+//  Created by Chaitanya Gudapati on 10/09/14.
 //  Copyright (c) 2014 Gudapati Naga Venkata Chaitanya. All rights reserved.
 //
 
 #import "ResultsViewController.h"
+#import "ScratchWindowController.h"
 
 @interface ResultsViewController ()
 
@@ -14,9 +15,5 @@
 
 @implementation ResultsViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
-}
 
 @end

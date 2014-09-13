@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		C2234E1719BD41F500949E46 /* ModelEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E1519BD41F500949E46 /* ModelEntryViewController.m */; };
 		C2234E1819BD41F500949E46 /* ModelEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E1619BD41F500949E46 /* ModelEntryView.xib */; };
-		C2234E2119BD4A3B00949E46 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */; };
-		C2234E2219BD4A3B00949E46 /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E2019BD4A3B00949E46 /* ResultsView.xib */; };
 		C2234E2619BD4A7D00949E46 /* ScratchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */; };
 		C2234E2719BD4A7D00949E46 /* ScratchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */; };
+		C242532319C0B57600A6D6CE /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C242532119C0B57600A6D6CE /* ResultsViewController.m */; };
+		C242532419C0B57600A6D6CE /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C242532219C0B57600A6D6CE /* ResultsView.xib */; };
 		C26B516E19BCA22C00D66D5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B516D19BCA22C00D66D5E /* main.m */; };
 		C26B517119BCA22C00D66D5E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B517019BCA22C00D66D5E /* AppDelegate.m */; };
 		C26B517319BCA22C00D66D5E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C26B517219BCA22C00D66D5E /* Images.xcassets */; };
@@ -35,12 +35,12 @@
 		C2234E1419BD41F500949E46 /* ModelEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntryViewController.h; sourceTree = "<group>"; };
 		C2234E1519BD41F500949E46 /* ModelEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEntryViewController.m; sourceTree = "<group>"; };
 		C2234E1619BD41F500949E46 /* ModelEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelEntryView.xib; sourceTree = "<group>"; };
-		C2234E1E19BD4A3B00949E46 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
-		C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
-		C2234E2019BD4A3B00949E46 /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
 		C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchWindowController.h; sourceTree = "<group>"; };
 		C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchWindowController.m; sourceTree = "<group>"; };
 		C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScratchWindow.xib; sourceTree = "<group>"; };
+		C242532019C0B57600A6D6CE /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		C242532119C0B57600A6D6CE /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		C242532219C0B57600A6D6CE /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
 		C26B516819BCA22C00D66D5E /* MacSolver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacSolver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C26B516C19BCA22C00D66D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C26B516D19BCA22C00D66D5E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,9 +104,9 @@
 			children = (
 				C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */,
 				C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */,
-				C2234E1E19BD4A3B00949E46 /* ResultsViewController.h */,
-				C2234E1F19BD4A3B00949E46 /* ResultsViewController.m */,
 				C2234E1419BD41F500949E46 /* ModelEntryViewController.h */,
+				C242532019C0B57600A6D6CE /* ResultsViewController.h */,
+				C242532119C0B57600A6D6CE /* ResultsViewController.m */,
 				C2234E1519BD41F500949E46 /* ModelEntryViewController.m */,
 				C2CBD94A19BD318E001F1B3D /* lp_solve Library */,
 				C26B516F19BCA22C00D66D5E /* AppDelegate.h */,
@@ -146,8 +146,8 @@
 		C26B519A19BCBC3700D66D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C242532219C0B57600A6D6CE /* ResultsView.xib */,
 				C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */,
-				C2234E2019BD4A3B00949E46 /* ResultsView.xib */,
 				C2234E1619BD41F500949E46 /* ModelEntryView.xib */,
 				C26B517419BCA22C00D66D5E /* MainMenu.xib */,
 			);
@@ -252,7 +252,7 @@
 			files = (
 				C26B517319BCA22C00D66D5E /* Images.xcassets in Resources */,
 				C26B517619BCA22C00D66D5E /* MainMenu.xib in Resources */,
-				C2234E2219BD4A3B00949E46 /* ResultsView.xib in Resources */,
+				C242532419C0B57600A6D6CE /* ResultsView.xib in Resources */,
 				C2234E2719BD4A7D00949E46 /* ScratchWindow.xib in Resources */,
 				C2234E1819BD41F500949E46 /* ModelEntryView.xib in Resources */,
 			);
@@ -275,8 +275,8 @@
 				C26B517119BCA22C00D66D5E /* AppDelegate.m in Sources */,
 				C2234E1719BD41F500949E46 /* ModelEntryViewController.m in Sources */,
 				C26B516E19BCA22C00D66D5E /* main.m in Sources */,
-				C2234E2119BD4A3B00949E46 /* ResultsViewController.m in Sources */,
 				C2234E2619BD4A7D00949E46 /* ScratchWindowController.m in Sources */,
+				C242532319C0B57600A6D6CE /* ResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,13 +391,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = MacSolver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacSolver",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -406,13 +409,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = MacSolver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MacSolver",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -431,6 +437,7 @@
 				);
 				INFOPLIST_FILE = MacSolverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacSolver.app/Contents/MacOS/MacSolver";
 			};
@@ -447,6 +454,7 @@
 				);
 				INFOPLIST_FILE = MacSolverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacSolver.app/Contents/MacOS/MacSolver";
 			};

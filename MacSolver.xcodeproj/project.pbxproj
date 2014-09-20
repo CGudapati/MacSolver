@@ -11,6 +11,7 @@
 		C2234E1819BD41F500949E46 /* ModelEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E1619BD41F500949E46 /* ModelEntryView.xib */; };
 		C2234E2619BD4A7D00949E46 /* ScratchWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */; };
 		C2234E2719BD4A7D00949E46 /* ScratchWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */; };
+		C234827019C521D400DE1338 /* ModelEntryTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C234826F19C521D400DE1338 /* ModelEntryTextView.m */; };
 		C242532319C0B57600A6D6CE /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C242532119C0B57600A6D6CE /* ResultsViewController.m */; };
 		C242532419C0B57600A6D6CE /* ResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C242532219C0B57600A6D6CE /* ResultsView.xib */; };
 		C26B516E19BCA22C00D66D5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B516D19BCA22C00D66D5E /* main.m */; };
@@ -38,6 +39,8 @@
 		C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchWindowController.h; sourceTree = "<group>"; };
 		C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScratchWindowController.m; sourceTree = "<group>"; };
 		C2234E2519BD4A7D00949E46 /* ScratchWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScratchWindow.xib; sourceTree = "<group>"; };
+		C234826E19C521D400DE1338 /* ModelEntryTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntryTextView.h; sourceTree = "<group>"; };
+		C234826F19C521D400DE1338 /* ModelEntryTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelEntryTextView.m; sourceTree = "<group>"; };
 		C242532019C0B57600A6D6CE /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
 		C242532119C0B57600A6D6CE /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		C242532219C0B57600A6D6CE /* ResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsView.xib; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 		C26B516A19BCA22C00D66D5E /* MacSolver */ = {
 			isa = PBXGroup;
 			children = (
+				C234826E19C521D400DE1338 /* ModelEntryTextView.h */,
+				C234826F19C521D400DE1338 /* ModelEntryTextView.m */,
 				C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */,
 				C2234E2419BD4A7D00949E46 /* ScratchWindowController.m */,
 				C2234E1419BD41F500949E46 /* ModelEntryViewController.h */,
@@ -272,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C234827019C521D400DE1338 /* ModelEntryTextView.m in Sources */,
 				C26B517119BCA22C00D66D5E /* AppDelegate.m in Sources */,
 				C2234E1719BD41F500949E46 /* ModelEntryViewController.m in Sources */,
 				C26B516E19BCA22C00D66D5E /* main.m in Sources */,

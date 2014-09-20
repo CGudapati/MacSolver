@@ -13,6 +13,7 @@
 
 @interface ScratchWindowController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 @property(nonatomic, assign) NSViewController *myScratchViewController;
+@property (strong) IBOutlet NSWindow *modelWindow;
 
 @property(nonatomic, strong) ModelEntryViewController *myModelEntryViewController;
 @property(nonatomic, strong) ResultsViewController *myResultsViewController;

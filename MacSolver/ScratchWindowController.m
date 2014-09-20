@@ -65,7 +65,7 @@ NSString *const kResultsView = @"ResultsView";
     [[self.myScratchViewController view] setFrame:[self.scratchView bounds]];
     
     
-   //When the results view is loaded, the TableView gets it's data source and Delegate
+    //When the results view is loaded, the TableView gets it's data source and Delegate
     if (whichViewTag == kResultsViewtag) {
         self.myResultsViewController.variablesTableView.delegate = self;
         self.myResultsViewController.variablesTableView.dataSource = self;
@@ -112,75 +112,77 @@ NSString *const kResultsView = @"ResultsView";
         NSLog(@"Unable to create LP");
         self.returnValue = 1;
     }
+    if (self.returnValue == 1) {
+        NSBeginAlertSheet(@"Unable to Create LP", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"Unable to create LP frok the given input. Please check again ");
+    }
     
     
-
-    int cols = get_Ncolumns(lp); //Get's the number of variables
-
-    
-    
-    self.returnValue = solve(lp);
     if (self.returnValue == 0) {
-        [self.showResultsButton setEnabled:YES];
-    }
-
-    
-    self.optimizedValue = get_working_objective(lp); //The objective
-    
-    char* cArrayOfVariableNames[cols-1];
-    REAL cArrayOfVariableValues[cols-1];
-    
-    for (int i = 1; i<= cols; i++){
-        cArrayOfVariableNames[i-1] = get_origcol_name(lp, i);
-    }
-    get_variables(lp, cArrayOfVariableValues);
-    
-   
-    
-    // creating an array of Variable names
-    if (!self.arrayOfVariableNames){
-        self.arrayOfVariableNames = [[NSMutableArray alloc] init];
-    }
-    else {
-        [self.arrayOfVariableNames removeAllObjects];
-    }
-    
-    for (int i = 0; i< cols; i++){
-        NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
+        int cols = get_Ncolumns(lp); //Get's the number of variables
+        self.returnValue = solve(lp);
         
-        if([tempString length] > 0){
-            [self.arrayOfVariableNames addObject:tempString];
+        self.optimizedValue = get_working_objective(lp); //The objective
+        
+        char* cArrayOfVariableNames[cols-1];
+        REAL cArrayOfVariableValues[cols-1];
+        
+        if (!self.arrayOfVariableNames){
+            self.arrayOfVariableNames = [[NSMutableArray alloc] init];
+        }
+        else {
+            [self.arrayOfVariableNames removeAllObjects];
+        }
+        
+            for (int i = 0; i< cols; i++){
+                cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
+                printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
+                if (cArrayOfVariableNames[i]) {
+                    NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
+                    [self.arrayOfVariableNames addObject:tempString];
+                }
+                else{
+                    self.returnValue = 2;
+                }
+            }
+        
+            get_variables(lp, cArrayOfVariableValues);
+        printf("Number of columns: %d\n", cols);
+       
+        
+        
+        
+        // creating an NSarray of Variable names
+        
+       
+        
+        //creating an array of Variable values
+        
+        if (!self.arrayOfVariableValues) {
+            self.arrayOfVariableValues = [[NSMutableArray alloc] init];
         }
         else{
-            NSLog(@"string is empty");
+            [self.arrayOfVariableValues removeAllObjects];
         }
-    }
-    
-  //creating an array of Variable values
-    
-    if (!self.arrayOfVariableValues) {
-        self.arrayOfVariableValues = [[NSMutableArray alloc] init];
-           }
-    else{
-        [self.arrayOfVariableValues removeAllObjects];
-    }
         
-    for (int i = 0; i < cols; i++) {
-        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfVariableValues[i]];
+        for (int j = 0; j < cols; j++) {
+            NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfVariableValues[j]];
             [self.arrayOfVariableValues addObject:tempNumber];
         }
-    
-    if(!self.constArrayOfVariableNames){
-    self.constArrayOfVariableNames = [self.arrayOfVariableNames copy];
+        
+        
+        if (self.returnValue == 2) {
+            NSBeginAlertSheet(@"Issues with model" , @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"There might be some issues with your model");
+        }
+        
+        if (self.returnValue == 0) {
+            [self.showResultsButton setEnabled:YES];
+        }
+        
+        
+        delete_lp(lp);
+        free(cFilePath);
     }
     
-    if (!self.constArrayOfVariableValues) {
-        self.constArrayOfVariableValues = [self.arrayOfVariableValues copy];
-    }
-    
-    
-    delete_lp(lp);
-    free(cFilePath);
 }
 
 - (IBAction)showResults:(NSButton *)sender {
@@ -188,6 +190,7 @@ NSString *const kResultsView = @"ResultsView";
     [self.solveButton setHidden:YES];
     [self.showResultsButton setHidden:YES];
     [self.backToModelButton setHidden:NO];
+
     [self.myResultsViewController.optimizedValueLabel setStringValue:[NSString stringWithFormat:@"%0.3f", self.optimizedValue]];
 }
 
@@ -195,26 +198,30 @@ NSString *const kResultsView = @"ResultsView";
     [self changeViewController:[sender tag]];
     [self.solveButton setHidden:NO];
     [self.showResultsButton setHidden:NO];
+    [self.showResultsButton setEnabled:NO];
     [self.backToModelButton setHidden:YES];
 }
 
 
-    //implementing the tableview for Variables and thir values
+//implementing the TableView for Variables and their values
+
+
 
 -(NSInteger) numberOfRowsInTableView:(NSTableView *)tableView{
-    return [self.constArrayOfVariableNames count];
+    return [self.arrayOfVariableNames count];
 }
 
 -(id) tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    if ([tableColumn.identifier isEqualToString:@"variables"]) {
-        return [self.constArrayOfVariableNames objectAtIndex:row];
-    }
-    else{
-        return [self.constArrayOfVariableValues objectAtIndex:row];
-    }
+    return [([tableColumn.identifier isEqualToString:@"variables"] ? self.arrayOfVariableNames : self.arrayOfVariableValues) objectAtIndex:row];
     
 }
 
+
+-(void) sheetDidEnd: (NSWindow *) sheet resultCode:(NSInteger) resultCode contextInfo:(void *) contextInfo{
+    if (resultCode == NSAlertDefaultReturn) {
+        NSLog(@"OK");
+    }
+}
 
 
 

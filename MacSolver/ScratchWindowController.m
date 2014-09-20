@@ -30,6 +30,7 @@ NSString *const kResultsView = @"ResultsView";
 -(void) awakeFromNib{
     [self changeViewController:kModelEntryViewTag];
     [self.myModelEntryViewController.textField setRichText:NO];
+    [self.myModelEntryViewController.textField setFont:[NSFont userFixedPitchFontOfSize:12.5]];
     [self.backToModelButton setHidden:YES];
     [self.showResultsButton setEnabled:NO];
 }
@@ -42,10 +43,12 @@ NSString *const kResultsView = @"ResultsView";
 
 
 -(void) changeViewController: (NSInteger) whichViewTag{
+    
     if ([self.myScratchViewController view] != nil) {
         [[self.myScratchViewController view] removeFromSuperview];
     }
     switch (whichViewTag) {
+            
         case kModelEntryViewTag:
             if (self.myModelEntryViewController == nil) {
                 self.myModelEntryViewController = [[ModelEntryViewController alloc] initWithNibName:kModelEntryView bundle:nil];
@@ -71,6 +74,9 @@ NSString *const kResultsView = @"ResultsView";
         self.myResultsViewController.variablesTableView.dataSource = self;
         [self.myResultsViewController.variablesTableView reloadData];
     }
+    
+    
+    
     
 }
 
@@ -101,8 +107,6 @@ NSString *const kResultsView = @"ResultsView";
     NSString *filePathNSString = [fileURL absoluteString];
     NSString *filePathModified = [filePathNSString substringFromIndex:7];
     
-    NSLog(@"%@", filePathModified);
-    
     const char *constCFilePath = [filePathModified UTF8String];
     char * cFilePath = strdup(constCFilePath);
     
@@ -113,13 +117,17 @@ NSString *const kResultsView = @"ResultsView";
         self.returnValue = 1;
     }
     if (self.returnValue == 1) {
-        NSBeginAlertSheet(@"Unable to Create LP", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"Unable to create LP frok the given input. Please check again ");
+        NSBeginAlertSheet(@"Unable to Create LP", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"Unable to create LP from the given input. Please check again ");
     }
     
     
     if (self.returnValue == 0) {
         int cols = get_Ncolumns(lp); //Get's the number of variables
         self.returnValue = solve(lp);
+        
+        if (self.returnValue == 2) {
+            NSBeginAlertSheet(@"The model is infeasible", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"The entered model is infeasible. Enter a feasible model and try again");
+        }
         
         self.optimizedValue = get_working_objective(lp); //The objective
         
@@ -133,27 +141,27 @@ NSString *const kResultsView = @"ResultsView";
             [self.arrayOfVariableNames removeAllObjects];
         }
         
-            for (int i = 0; i< cols; i++){
-                cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
-                printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
-                if (cArrayOfVariableNames[i]) {
-                    NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
-                    [self.arrayOfVariableNames addObject:tempString];
-                }
-                else{
-                    self.returnValue = 2;
-                }
+        for (int i = 0; i< cols; i++){
+            cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
+            printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
+            if (cArrayOfVariableNames[i]) {
+                NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
+                [self.arrayOfVariableNames addObject:tempString];
             }
+            else{
+                self.returnValue = 2;
+            }
+        }
         
-            get_variables(lp, cArrayOfVariableValues);
+        get_variables(lp, cArrayOfVariableValues);
         printf("Number of columns: %d\n", cols);
-       
+        
         
         
         
         // creating an NSarray of Variable names
         
-       
+        
         
         //creating an array of Variable values
         
@@ -190,7 +198,7 @@ NSString *const kResultsView = @"ResultsView";
     [self.solveButton setHidden:YES];
     [self.showResultsButton setHidden:YES];
     [self.backToModelButton setHidden:NO];
-
+    
     [self.myResultsViewController.optimizedValueLabel setStringValue:[NSString stringWithFormat:@"%0.3f", self.optimizedValue]];
 }
 

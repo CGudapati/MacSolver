@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="14A329r" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultsViewController">
@@ -18,16 +18,16 @@
             <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView id="NBS-z6-Hve">
+                <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBS-z6-Hve">
                     <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Solution" identifier="1" id="Ylx-dL-1M2">
-                            <view key="view" id="YU4-pe-h9A">
+                            <view key="view" ambiguous="YES" id="YU4-pe-h9A">
                                 <rect key="frame" x="10" y="33" width="815" height="369"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="MPD-ge-sld">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-ge-sld">
                                         <rect key="frame" x="15" y="337" width="104" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optimal value" id="6YC-Ta-VGI">
                                             <font key="font" metaFont="system"/>
@@ -35,7 +35,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="E1M-7n-kuK">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1M-7n-kuK">
                                         <rect key="frame" x="169" y="337" width="500" height="17"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Optimal value" id="wFe-Qt-sJn">
                                             <font key="font" metaFont="system"/>
@@ -51,15 +51,14 @@
                                 <rect key="frame" x="10" y="33" width="815" height="369"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView appearanceType="aqua" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="zvi-U6-FAu">
+                                    <scrollView appearanceType="aqua" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvi-U6-FAu">
                                         <rect key="frame" x="17" y="217" width="240" height="135"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <clipView key="contentView" id="FEK-TH-5tE">
+                                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="FEK-TH-5tE">
                                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="wQT-rF-ZML" id="sbl-gd-JxU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="214" height="19"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -67,7 +66,7 @@
                                                     <tableColumns>
                                                         <tableColumn identifier="variables" width="92" minWidth="40" maxWidth="1000" id="GFA-gG-V8A">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Variables">
-                                                                <font key="font" size="13" name=".HelveticaNeueDeskInterface-Regular"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                             </tableHeaderCell>
@@ -80,7 +79,7 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="values" width="116" minWidth="40" maxWidth="1000" id="JD3-zm-jCT">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Values">
-                                                                <font key="font" size="13" name=".HelveticaNeueDeskInterface-Regular"/>
+                                                                <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                                             </tableHeaderCell>
@@ -97,10 +96,10 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="xgf-Vr-wnX">
-                                            <rect key="frame" x="1" y="62.012399315834045" width="112.23426055908203" height="15"/>
+                                            <rect key="frame" x="1" y="62.012399315834045" width="112" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="58O-Im-dN9">
+                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="58O-Im-dN9">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -115,6 +114,7 @@
                     </tabViewItems>
                 </tabView>
             </subviews>
+            <point key="canvasLocation" x="792.5" y="281.5"/>
         </customView>
     </objects>
 </document>

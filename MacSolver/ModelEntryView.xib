@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
@@ -13,24 +14,25 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJN-DL-uDU">
-                    <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="aJN-DL-uDU">
+                    <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <clipView key="contentView" id="8nP-Kz-Ftc">
                         <rect key="frame" x="1" y="1" width="223" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e9a-Sy-F9r" customClass="ModelEntryTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="223" height="413"/>
+                                <rect key="frame" x="0.0" y="0.0" width="223" height="518"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="818" height="413"/>
-                                <size key="maxSize" width="835" height="10000000"/>
+                                <size key="minSize" width="943" height="518"/>
+                                <size key="maxSize" width="960" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="818" height="413"/>
-                                <size key="maxSize" width="835" height="10000000"/>
+                                <size key="minSize" width="943" height="518"/>
+                                <size key="maxSize" width="960" height="10000000"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,13 +47,7 @@
                     </scroller>
                 </scrollView>
             </subviews>
-            <constraints>
-                <constraint firstItem="aJN-DL-uDU" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="6eA-su-4Ox"/>
-                <constraint firstItem="aJN-DL-uDU" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="HpP-1Q-c40"/>
-                <constraint firstAttribute="trailing" secondItem="aJN-DL-uDU" secondAttribute="trailing" id="O6c-Nu-gjh"/>
-                <constraint firstAttribute="bottom" secondItem="aJN-DL-uDU" secondAttribute="bottom" id="OTz-oH-dak"/>
-            </constraints>
-            <point key="canvasLocation" x="396.5" y="298.5"/>
+            <point key="canvasLocation" x="396" y="298"/>
         </customView>
     </objects>
 </document>

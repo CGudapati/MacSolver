@@ -197,7 +197,7 @@ NSString *const kResultsView = @"ResultsView";
         [self.arrayOfVariableValues addObject:tempNumber];
     }
     
-    NSLog(@"return current vale: @%d",self.returnValue );
+    NSLog(@"return current vale: %d",self.returnValue );
     
     
     if (self.returnValue == 0) {

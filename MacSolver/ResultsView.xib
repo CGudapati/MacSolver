@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361p" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
@@ -15,28 +15,31 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBS-z6-Hve">
-                    <rect key="frame" x="0.0" y="0.0" width="835" height="415"/>
+                <tabView id="NBS-z6-Hve">
+                    <rect key="frame" x="0.0" y="0.0" width="960" height="520"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Solution" identifier="1" id="Ylx-dL-1M2">
-                            <view key="view" ambiguous="YES" id="YU4-pe-h9A">
-                                <rect key="frame" x="10" y="33" width="815" height="369"/>
+                            <view key="view" id="YU4-pe-h9A">
+                                <rect key="frame" x="10" y="33" width="815" height="373"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MPD-ge-sld">
-                                        <rect key="frame" x="15" y="337" width="104" height="17"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="MPD-ge-sld">
+                                        <rect key="frame" x="15" y="341" width="104" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optimal value" id="6YC-Ta-VGI">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1M-7n-kuK">
-                                        <rect key="frame" x="169" y="337" width="500" height="17"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="E1M-7n-kuK">
+                                        <rect key="frame" x="169" y="341" width="500" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Optimal value" id="wFe-Qt-sJn">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -48,12 +51,13 @@
                         </tabViewItem>
                         <tabViewItem label="Variables and Constraints" identifier="2" id="wi9-7t-wO1">
                             <view key="view" id="eJF-CU-xov">
-                                <rect key="frame" x="10" y="33" width="815" height="369"/>
+                                <rect key="frame" x="10" y="33" width="940" height="474"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView appearanceType="aqua" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvi-U6-FAu">
-                                        <rect key="frame" x="17" y="217" width="240" height="135"/>
-                                        <clipView key="contentView" ambiguous="YES" misplaced="YES" id="FEK-TH-5tE">
+                                    <scrollView appearanceType="aqua" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="zvi-U6-FAu">
+                                        <rect key="frame" x="17" y="322" width="240" height="135"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <clipView key="contentView" id="FEK-TH-5tE">
                                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -114,7 +118,7 @@
                     </tabViewItems>
                 </tabView>
             </subviews>
-            <point key="canvasLocation" x="792.5" y="281.5"/>
+            <point key="canvasLocation" x="438" y="291"/>
         </customView>
     </objects>
 </document>

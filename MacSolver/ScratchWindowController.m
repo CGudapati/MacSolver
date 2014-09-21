@@ -30,7 +30,7 @@ NSString *const kResultsView = @"ResultsView";
 -(void) awakeFromNib{
     [self changeViewController:kModelEntryViewTag];
     [self.myModelEntryViewController.textField setRichText:NO];
-    [self.myModelEntryViewController.textField setFont:[NSFont userFixedPitchFontOfSize:12.5]];
+    [self.myModelEntryViewController.textField setFont:[NSFont userFixedPitchFontOfSize:12.5]]; //default font for entering the model
     [self.backToModelButton setHidden:YES];
     [self.showResultsButton setEnabled:NO];
 }
@@ -68,7 +68,7 @@ NSString *const kResultsView = @"ResultsView";
     [[self.myScratchViewController view] setFrame:[self.scratchView bounds]];
     
     
-    //When the results view is loaded, the TableView gets it's data source and Delegate
+    //When the results view is loaded, the TableView gets it's DataSource and Delegate
     if (whichViewTag == kResultsViewtag) {
         self.myResultsViewController.variablesTableView.delegate = self;
         self.myResultsViewController.variablesTableView.dataSource = self;
@@ -102,7 +102,7 @@ NSString *const kResultsView = @"ResultsView";
     //Solving the saved model;
     
     lprec *lp;
-    self.returnValue = 0;
+    self.returnValue = 0; //setting the return value of solve() to zero. Will be calling different alertsheets
     
     NSString *filePathNSString = [fileURL absoluteString];
     NSString *filePathModified = [filePathNSString substringFromIndex:7];
@@ -116,82 +116,101 @@ NSString *const kResultsView = @"ResultsView";
         NSLog(@"Unable to create LP");
         self.returnValue = 1;
     }
+    
     if (self.returnValue == 1) {
-        NSBeginAlertSheet(@"Unable to Create LP", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"Unable to create LP from the given input. Please check again ");
+        NSAlert *createLPFailAlert = [NSAlert alertWithMessageText:@"Unable to create LP" defaultButton:@"Ok" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"Unable to create LP from the given input. Please check again"];
+        SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
+        [createLPFailAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
     }
+    
+    
+    int cols = get_Ncolumns(lp); //Get's the number of variables
+    
+    //solving the LP and getting it's return value
+    
+    self.returnValue = solve(lp);
+    
+    //NSAlerts based on the value of self.returnValue
+    
+    if (self.returnValue == 2) {
+        NSAlert *infeasibleAlert =  [NSAlert alertWithMessageText:@"The model is infeasible" defaultButton:@"OK" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"The entered model is infeasible. Enter a feasible model and try again"];
+        SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
+        [infeasibleAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
+    }
+    
+    if(self.returnValue == 3){
+        NSAlert *unboundedAlert = [NSAlert alertWithMessageText:@"The model is unbounded" defaultButton:@"OK" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"The entered model is unbounded. Please enter a bounded model"];
+        SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
+        [unboundedAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
+    }
+    
+    
+    
+    self.optimizedValue = get_working_objective(lp); //The value of the objective after successful solve
+    
+    char* cArrayOfVariableNames[cols-1];
+    REAL cArrayOfVariableValues[cols-1];
+    
+    if (!self.arrayOfVariableNames){
+        self.arrayOfVariableNames = [[NSMutableArray alloc] init];
+    }
+    else {
+        [self.arrayOfVariableNames removeAllObjects];
+    }
+    
+    for (int i = 0; i< cols; i++){
+        cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
+        
+        #ifndef NDEBUG
+            printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
+        #endif
+        
+        if (cArrayOfVariableNames[i]) {
+            NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
+            [self.arrayOfVariableNames addObject:tempString];
+        }
+        else{
+            self.returnValue = 12;
+        }
+    }
+    
+    if(self.returnValue == 12){
+        NSAlert *wrongVariableAlert = [NSAlert alertWithMessageText:@"Something wrong happened" defaultButton:@"OK" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"Couldn't find the solution due to some issues in the model. Please enter correct model"];
+    
+        SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
+        [wrongVariableAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
+    }
+    
+    get_variables(lp, cArrayOfVariableValues);
+    printf("Number of columns: %d\n", cols);
+    
+    
+    if (!self.arrayOfVariableValues) {
+        self.arrayOfVariableValues = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfVariableValues removeAllObjects];
+    }
+    
+    for (int j = 0; j < cols; j++) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfVariableValues[j]];
+        [self.arrayOfVariableValues addObject:tempNumber];
+    }
+    
+    NSLog(@"return current vale: @%d",self.returnValue );
     
     
     if (self.returnValue == 0) {
-        int cols = get_Ncolumns(lp); //Get's the number of variables
-        self.returnValue = solve(lp);
-        
-        if (self.returnValue == 2) {
-            NSBeginAlertSheet(@"The model is infeasible", @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"The entered model is infeasible. Enter a feasible model and try again");
-        }
-        
-        self.optimizedValue = get_working_objective(lp); //The objective
-        
-        char* cArrayOfVariableNames[cols-1];
-        REAL cArrayOfVariableValues[cols-1];
-        
-        if (!self.arrayOfVariableNames){
-            self.arrayOfVariableNames = [[NSMutableArray alloc] init];
-        }
-        else {
-            [self.arrayOfVariableNames removeAllObjects];
-        }
-        
-        for (int i = 0; i< cols; i++){
-            cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
-            printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
-            if (cArrayOfVariableNames[i]) {
-                NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
-                [self.arrayOfVariableNames addObject:tempString];
-            }
-            else{
-                self.returnValue = 2;
-            }
-        }
-        
-        get_variables(lp, cArrayOfVariableValues);
-        printf("Number of columns: %d\n", cols);
-        
-        
-        
-        
-        // creating an NSarray of Variable names
-        
-        
-        
-        //creating an array of Variable values
-        
-        if (!self.arrayOfVariableValues) {
-            self.arrayOfVariableValues = [[NSMutableArray alloc] init];
-        }
-        else{
-            [self.arrayOfVariableValues removeAllObjects];
-        }
-        
-        for (int j = 0; j < cols; j++) {
-            NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfVariableValues[j]];
-            [self.arrayOfVariableValues addObject:tempNumber];
-        }
-        
-        
-        if (self.returnValue == 2) {
-            NSBeginAlertSheet(@"Issues with model" , @"OK", @"", @"", self.modelWindow , self, @selector(sheetDidEnd: resultCode:contextInfo:), NULL, NULL, @"There might be some issues with your model");
-        }
-        
-        if (self.returnValue == 0) {
-            [self.showResultsButton setEnabled:YES];
-        }
-        
-        
-        delete_lp(lp);
-        free(cFilePath);
+        [self.showResultsButton setEnabled:YES];
     }
     
+    
+    delete_lp(lp);
+    free(cFilePath);
+    
+    
 }
+
 
 - (IBAction)showResults:(NSButton *)sender {
     [self changeViewController:[sender tag]];
@@ -225,11 +244,12 @@ NSString *const kResultsView = @"ResultsView";
 }
 
 
--(void) sheetDidEnd: (NSWindow *) sheet resultCode:(NSInteger) resultCode contextInfo:(void *) contextInfo{
-    if (resultCode == NSAlertDefaultReturn) {
+-(void) endOfAlert: (NSAlert *) alert returnCode:(int) resultCode contextInfo:(void *) contextInfo{
+    if (resultCode == NSAlertDefaultReturn){
         NSLog(@"OK");
     }
 }
+
 
 
 

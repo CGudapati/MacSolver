@@ -14,13 +14,15 @@
 @interface ScratchWindowController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfVariableNames;
 @property (nonatomic, strong) NSMutableArray *arrayOfVariableValues;
+@property (nonatomic, strong) NSMutableArray *arrayOfConstraintValues;
+@property (nonatomic, strong) NSMutableArray *arrayOfConstraintNames;
 @end
 
 @implementation ScratchWindowController
 
 enum   {
     kModelEntryViewTag = 0,   //Giving each view a tag for the changeViewcontrollerMethod
-    kResultsViewtag
+    kResultsViewTag
 };
 
 
@@ -56,7 +58,7 @@ NSString *const kResultsView = @"ResultsView";
             self.myScratchViewController  = self.myModelEntryViewController;
             break;
             
-        case kResultsViewtag:
+        case kResultsViewTag:
             if (self.myResultsViewController == nil) {
                 self.myResultsViewController = [[ResultsViewController alloc] initWithNibName:kResultsView bundle:nil];
             }
@@ -69,19 +71,18 @@ NSString *const kResultsView = @"ResultsView";
     
     
     //When the results view is loaded, the TableView gets it's DataSource and Delegate
-    if (whichViewTag == kResultsViewtag) {
+    if (whichViewTag == kResultsViewTag) {
         self.myResultsViewController.variablesTableView.delegate = self;
         self.myResultsViewController.variablesTableView.dataSource = self;
         [self.myResultsViewController.variablesTableView reloadData];
     }
     
-    
-    
-    
 }
 
 
 - (IBAction)solve:(NSButton *)sender {
+    
+#pragma mark - Saving the file as .lp
     
     //The text in the textField will be stored in a .lp file.
     
@@ -98,6 +99,10 @@ NSString *const kResultsView = @"ResultsView";
     NSLog(@"%@", fileURL);
     
     [loadedModelTemp writeToURL:fileURL atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+    
+    
+#pragma mark - Solving the .lp file
+    
     
     //Solving the saved model;
     
@@ -124,7 +129,8 @@ NSString *const kResultsView = @"ResultsView";
     }
     
     
-    int cols = get_Ncolumns(lp); //Get's the number of variables
+    int cols = get_Ncolumns(lp); //Gets the number of variables
+    int rows = get_Nrows(lp); // Gets the number of constrainrs
     
     //solving the LP and getting it's return value
     
@@ -144,12 +150,15 @@ NSString *const kResultsView = @"ResultsView";
         [unboundedAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
     }
     
+#pragma mark -Getting the data from Model
     
     
     self.optimizedValue = get_working_objective(lp); //The value of the objective after successful solve
     
     char* cArrayOfVariableNames[cols-1];
+    char* cArrayOfConstraintNames[rows-1];
     REAL cArrayOfVariableValues[cols-1];
+    REAL cArrayOfConstraintValues[rows-1];
     
     if (!self.arrayOfVariableNames){
         self.arrayOfVariableNames = [[NSMutableArray alloc] init];
@@ -157,13 +166,12 @@ NSString *const kResultsView = @"ResultsView";
     else {
         [self.arrayOfVariableNames removeAllObjects];
     }
-    
     for (int i = 0; i< cols; i++){
         cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
         
-        #ifndef NDEBUG
-            printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
-        #endif
+#ifndef NDEBUG
+        printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
+#endif
         
         if (cArrayOfVariableNames[i]) {
             NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
@@ -174,16 +182,16 @@ NSString *const kResultsView = @"ResultsView";
         }
     }
     
+    
     if(self.returnValue == 12){
         NSAlert *wrongVariableAlert = [NSAlert alertWithMessageText:@"Something wrong happened" defaultButton:@"OK" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"Couldn't find the solution due to some issues in the model. Please enter correct model"];
-    
+        
         SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
         [wrongVariableAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
     }
     
+    //Get the optimal value of variables
     get_variables(lp, cArrayOfVariableValues);
-    printf("Number of columns: %d\n", cols);
-    
     
     if (!self.arrayOfVariableValues) {
         self.arrayOfVariableValues = [[NSMutableArray alloc] init];
@@ -197,20 +205,59 @@ NSString *const kResultsView = @"ResultsView";
         [self.arrayOfVariableValues addObject:tempNumber];
     }
     
-    NSLog(@"return current vale: %d",self.returnValue );
+    NSLog(@"return current value: %d",self.returnValue );
+    
+    //Getting the Optimal value of constaints
+    
+    get_constraints(lp, cArrayOfConstraintValues);
+    if (!self.arrayOfConstraintValues) {
+        self.arrayOfConstraintValues = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfConstraintValues removeAllObjects];
+    }
+    
+    for (int i = 0; i <rows; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfConstraintValues[i]];
+        [self.arrayOfConstraintValues addObject:tempNumber];
+        NSLog(@"%@", self.arrayOfConstraintValues[i]);
+    }
+    
+    
+    //Get the names of the constarints
+    
+    if (!self.arrayOfConstraintNames) {
+        self.arrayOfConstraintNames = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfConstraintNames removeAllObjects];
+    }
+    for (int i = 0; i < rows; ++i) {
+        cArrayOfConstraintNames[i] = get_origrow_name(lp, i+1);
+        if (cArrayOfConstraintNames[i]) {
+            NSString *tempString = [NSString stringWithCString:cArrayOfConstraintNames[i] encoding:NSUTF8StringEncoding];
+            [self.arrayOfConstraintNames addObject:tempString];
+        }
+        else{
+            self.returnValue = 13;
+        }
+        
+    }
+
+#ifndef NDEBUG
+    for (int i = 0; i < rows; ++i) {
+        NSLog(@"the names of constraints and their values are: %@: %@", self.arrayOfConstraintNames[i], self.arrayOfConstraintValues[i]);
+    }
+#endif
     
     
     if (self.returnValue == 0) {
         [self.showResultsButton setEnabled:YES];
     }
     
-    
     delete_lp(lp);
     free(cFilePath);
-    
-    
 }
-
 
 - (IBAction)showResults:(NSButton *)sender {
     [self changeViewController:[sender tag]];
@@ -231,9 +278,6 @@ NSString *const kResultsView = @"ResultsView";
 
 
 //implementing the TableView for Variables and their values
-
-
-
 -(NSInteger) numberOfRowsInTableView:(NSTableView *)tableView{
     return [self.arrayOfVariableNames count];
 }
@@ -249,8 +293,5 @@ NSString *const kResultsView = @"ResultsView";
         NSLog(@"OK");
     }
 }
-
-
-
 
 @end

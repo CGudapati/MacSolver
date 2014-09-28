@@ -16,6 +16,16 @@
 @property (nonatomic, strong) NSMutableArray *arrayOfVariableValues;
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintValues;
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintNames;
+@property (nonatomic, strong) NSMutableArray *arrayOfDuals;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsLower;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsHigher;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsOfVariables;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsOfConstraints;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveCoefficients;
+@property (nonatomic, strong) NSMutableArray *arrayOfRHSValues;
+@property (nonatomic, strong) NSMutableArray *arratOfSlackValues;
+
+
 @end
 
 @implementation ScratchWindowController
@@ -159,19 +169,25 @@ NSString *const kResultsView = @"ResultsView";
     char* cArrayOfConstraintNames[rows-1];
     REAL cArrayOfVariableValues[cols-1];
     REAL cArrayOfConstraintValues[rows-1];
+    REAL cArrayOfDuals[1+cols+rows];
+    REAL cArrayOfDualsLower[1+cols+rows];
+    REAL cArrayOfDualsHigher[1+cols+rows];
+    REAL cArrayOfObjectiveCoefficients[1+cols];
+    REAL cArrayOfRHSValues[rows];
+    
+
+    
+    //Get the names of the variables
     
     if (!self.arrayOfVariableNames){
         self.arrayOfVariableNames = [[NSMutableArray alloc] init];
     }
+    
     else {
         [self.arrayOfVariableNames removeAllObjects];
     }
     for (int i = 0; i< cols; i++){
         cArrayOfVariableNames[i] = get_origcol_name(lp, i+1);
-        
-#ifndef NDEBUG
-        printf("varaibles in CArray: %s\n", cArrayOfVariableNames[i]);
-#endif
         
         if (cArrayOfVariableNames[i]) {
             NSString *tempString = [NSString stringWithCString:cArrayOfVariableNames[i] encoding:NSUTF8StringEncoding];
@@ -185,12 +201,12 @@ NSString *const kResultsView = @"ResultsView";
     
     if(self.returnValue == 12){
         NSAlert *wrongVariableAlert = [NSAlert alertWithMessageText:@"Something wrong happened" defaultButton:@"OK" alternateButton:@"" otherButton:@"" informativeTextWithFormat:@"Couldn't find the solution due to some issues in the model. Please enter correct model"];
-        
         SEL callback = @selector(endOfAlert:returnCode:contextInfo:);
         [wrongVariableAlert beginSheetModalForWindow:self.modelWindow modalDelegate:self didEndSelector:callback contextInfo:nil];
     }
     
     //Get the optimal value of variables
+    
     get_variables(lp, cArrayOfVariableValues);
     
     if (!self.arrayOfVariableValues) {
@@ -204,25 +220,6 @@ NSString *const kResultsView = @"ResultsView";
         NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfVariableValues[j]];
         [self.arrayOfVariableValues addObject:tempNumber];
     }
-    
-    NSLog(@"return current value: %d",self.returnValue );
-    
-    //Getting the Optimal value of constaints
-    
-    get_constraints(lp, cArrayOfConstraintValues);
-    if (!self.arrayOfConstraintValues) {
-        self.arrayOfConstraintValues = [[NSMutableArray alloc] init];
-    }
-    else{
-        [self.arrayOfConstraintValues removeAllObjects];
-    }
-    
-    for (int i = 0; i <rows; ++i) {
-        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfConstraintValues[i]];
-        [self.arrayOfConstraintValues addObject:tempNumber];
-        NSLog(@"%@", self.arrayOfConstraintValues[i]);
-    }
-    
     
     //Get the names of the constarints
     
@@ -241,22 +238,230 @@ NSString *const kResultsView = @"ResultsView";
         else{
             self.returnValue = 13;
         }
-        
     }
-
-#ifndef NDEBUG
-    for (int i = 0; i < rows; ++i) {
-        NSLog(@"the names of constraints and their values are: %@: %@", self.arrayOfConstraintNames[i], self.arrayOfConstraintValues[i]);
-    }
-#endif
-    
     
     if (self.returnValue == 0) {
         [self.showResultsButton setEnabled:YES];
     }
     
+    
+    //Getting the Optimal value of constraints
+    
+    get_constraints(lp, cArrayOfConstraintValues);
+    if (!self.arrayOfConstraintValues) {
+        self.arrayOfConstraintValues = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfConstraintValues removeAllObjects];
+    }
+    
+    for (int i = 0; i <rows; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfConstraintValues[i]];
+        [self.arrayOfConstraintValues addObject:tempNumber];
+    }
+    
+    // Getting the value of the coefficients of the objective function
+    
+    get_row(lp, 0, cArrayOfObjectiveCoefficients);
+    if (!self.arrayOfObjectiveCoefficients) {
+        self.arrayOfObjectiveCoefficients = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfObjectiveCoefficients removeAllObjects];
+    }
+    for (int i = 0; i < cols+1; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfObjectiveCoefficients[i]];
+        [self.arrayOfObjectiveCoefficients addObject:tempNumber];
+    }
+    
+    //Getting the value of the RHS values of constraints
+    
+    if (!self.arrayOfRHSValues) {
+        self.arrayOfRHSValues = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfRHSValues removeAllObjects];
+    }
+    for (int i = 0; i <= rows; ++i) {
+        cArrayOfRHSValues[i] = get_rh(lp, i);
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfRHSValues[i]];
+        
+        [self.arrayOfRHSValues addObject:tempNumber];
+    }
+    
+    //Getting the values of reduced costs
+    
+    get_sensitivity_rhs(lp, cArrayOfDuals, cArrayOfDualsLower, cArrayOfDualsHigher);
+    
+    if (!self.arrayOfDuals) {
+        self.arrayOfDuals = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDuals removeAllObjects];
+    }
+    for (int i = 0; i < cols+rows; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDuals[i]];
+        [self.arrayOfDuals addObject:tempNumber];
+    }
+    
+    if (!self.arrayOfDualsLower) {
+        self.arrayOfDualsLower = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsLower   removeAllObjects];
+    }
+    for (int i = 0; i < rows+ cols; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDualsLower[i]];
+        [self.arrayOfDualsLower addObject:tempNumber];
+    }
+    if (!self.arrayOfDualsHigher) {
+        self.arrayOfDualsHigher = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsHigher  removeAllObjects];
+    }
+    for (int i = 0; i < rows+ cols ; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDualsHigher[i]];
+        [self.arrayOfDualsHigher addObject:tempNumber];
+    }
+    
+    if (!self.arrayOfDualsOfConstraints) {
+        self.arrayOfDualsOfConstraints = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsOfConstraints removeAllObjects];
+    }
+    
+    for (int i = 0; i < rows; ++i) {
+        [self.arrayOfDualsOfConstraints addObject:self.arrayOfDuals[i]];
+    }
+    
+    if (!self.arrayOfDualsOfVariables) {
+        self.arrayOfDualsOfVariables = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsOfVariables removeAllObjects];
+    }
+    for (int i = rows; i < rows+cols; ++i) {
+        [self.arrayOfDualsOfVariables addObject:self.arrayOfDuals[i]];
+    }
+    
+    //Logging the values of the variables and constraints
+    
+    NSNumberFormatter *formatForDecimals = [[NSNumberFormatter alloc] init];
+    [formatForDecimals setMaximumFractionDigits:4];
+    [formatForDecimals setMinimumFractionDigits:2];
+    [formatForDecimals setMinimumIntegerDigits:1];
+    
+    NSLog(@"\n");
+    
+    NSLog(@"The number of Variables/Columns are %d", cols);
+    NSLog(@"The number of Constraints/Rows are %d", rows);
+    
+    NSLog(@"\n");
+    
+    //Logging the value of variables
+    for (int i = 0; i < cols; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfVariableValues[i]];
+        NSLog(@"Tha value of Variable %@ is %@", self.arrayOfVariableNames[i], tempString);
+    }
+    
+    NSLog(@"\n");
+    
+    //Logging the value of constraints
+    for (int i = 0; i < rows; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfConstraintValues[i]];
+        
+        NSLog(@"The value of %@ is %@", self.arrayOfConstraintNames[i], tempString);
+    }
+    
+    NSLog(@"\n");
+    
+    
+//    for (int i = 0; i < cols; ++i) {
+//        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfObjectiveLower[i]];
+//        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfObjectiveHigher[i]];
+//        
+//        NSLog(@"The lower value of the coeeficient of %@ is %@", self.arrayOfVariableNames[i], tempStringA);
+//        NSLog(@"The higher value of the coefficient of %@ is %@", self.arrayOfVariableNames[i], tempStringB);
+//    }
+    
+//    NSLog(@"\n");
+    
+    //Logging the reduced cost of constratints
+    
+    for (int i = 0; i < rows; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfDuals[i]];
+        NSLog(@"The reduced cost of %@ is %@", self.arrayOfConstraintNames[i],tempString);
+    }
+    
+    NSLog(@"\n");
+    
+    //Logging the lower value of reduced cost of constratints
+
+    
+    for (int i = 0; i < rows; ++i) {
+        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfDualsLower[i]];
+        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempStringA);
+    }
+    
+    NSLog(@"\n");
+    
+    //Logging the upper value of reduced cost of constratints
+
+    for (int i = 0; i < rows; ++i) {
+        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfDualsHigher[i]];
+        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempStringB);
+    }
+    
+    NSLog(@"\n");
+    //Logging the value of the reduced costs of variables
+    
+    for (int i = 0; i <cols; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfDuals[rows+i]];
+        NSLog(@"The reduced cost of %@ is %@", self.arrayOfVariableNames[i],tempString);
+    }
+    
+    NSLog(@"\n");
+    
+    //Logging the lower reduced cost of variables
+    
+    
+    for (int i = 0; i <cols; ++i) {
+        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfDualsLower[rows+i]];
+        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempStringA);
+    }
+    //Logging the higher reduced cost of variables
+    NSLog(@"\n");
+    
+    for (int i = 0; i <cols; ++i) {
+        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfDualsHigher[rows+i]];
+        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempStringB);
+    }
+    
+    
+    
+    
+    NSLog(@"\n");
+    for (int i = 1; i <= cols; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfObjectiveCoefficients[i]];
+        NSLog(@"The value of the objective coefficients is %@",tempString);
+    }
+    
+    NSLog(@"\n");
+    
+    for (int i = 1; i <= rows; ++i) {
+        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfRHSValues[i]];
+        NSLog(@"The RHS value of %@ is %@", self.arrayOfConstraintNames[i-1], tempString );
+    }
     delete_lp(lp);
     free(cFilePath);
+    
+    //Enables the show results button
+    
+    if (self.returnValue == 0) {
+        [self.showResultsButton setEnabled:YES];
+    }
 }
 
 - (IBAction)showResults:(NSButton *)sender {

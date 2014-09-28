@@ -16,9 +16,11 @@
 @property (nonatomic, strong) NSMutableArray *arrayOfVariableValues;
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintValues;
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintNames;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveUpper;
+@property (nonatomic, strong) NSMutableArray  *arrayOfObjectiveLower;
 @property (nonatomic, strong) NSMutableArray *arrayOfDuals;
 @property (nonatomic, strong) NSMutableArray *arrayOfDualsLower;
-@property (nonatomic, strong) NSMutableArray *arrayOfDualsHigher;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsUpper;
 @property (nonatomic, strong) NSMutableArray *arrayOfDualsOfVariables;
 @property (nonatomic, strong) NSMutableArray *arrayOfDualsOfConstraints;
 @property (nonatomic, strong) NSMutableArray *arrayOfObjectiveCoefficients;
@@ -169,13 +171,15 @@ NSString *const kResultsView = @"ResultsView";
     char* cArrayOfConstraintNames[rows-1];
     REAL cArrayOfVariableValues[cols-1];
     REAL cArrayOfConstraintValues[rows-1];
+    REAL cArrayOfObjectiveLower[cols-1];
+    REAL cArrayOfObjectiveUpper[cols-1];
     REAL cArrayOfDuals[1+cols+rows];
     REAL cArrayOfDualsLower[1+cols+rows];
-    REAL cArrayOfDualsHigher[1+cols+rows];
+    REAL cArrayOfDualsUpper[1+cols+rows];
     REAL cArrayOfObjectiveCoefficients[1+cols];
     REAL cArrayOfRHSValues[rows];
     
-
+    
     
     //Get the names of the variables
     
@@ -274,6 +278,36 @@ NSString *const kResultsView = @"ResultsView";
         [self.arrayOfObjectiveCoefficients addObject:tempNumber];
     }
     
+    //Getting the sensitivity of the constarints
+    
+    get_sensitivity_obj(lp, cArrayOfObjectiveLower, cArrayOfObjectiveUpper);
+    
+    if (!self.arrayOfObjectiveLower) {
+        self.arrayOfObjectiveLower = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfObjectiveLower removeAllObjects];
+    }
+    
+    for (int i = 0; i <= cols; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfObjectiveLower[i]];
+        [self.arrayOfObjectiveLower addObject:tempNumber];
+    }
+    
+    
+    if (!self.arrayOfObjectiveUpper) {
+        self.arrayOfObjectiveUpper = [[NSMutableArray alloc] init];
+    }
+    
+    else{
+        [self.arrayOfObjectiveUpper removeAllObjects];
+    }
+    
+    for (int i = 0; i <= cols; ++i) {
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfObjectiveUpper[i]];
+        [self.arrayOfObjectiveUpper addObject:tempNumber];
+    }
+    
     //Getting the value of the RHS values of constraints
     
     if (!self.arrayOfRHSValues) {
@@ -291,7 +325,7 @@ NSString *const kResultsView = @"ResultsView";
     
     //Getting the values of reduced costs
     
-    get_sensitivity_rhs(lp, cArrayOfDuals, cArrayOfDualsLower, cArrayOfDualsHigher);
+    get_sensitivity_rhs(lp, cArrayOfDuals, cArrayOfDualsLower, cArrayOfDualsUpper);
     
     if (!self.arrayOfDuals) {
         self.arrayOfDuals = [[NSMutableArray alloc] init];
@@ -314,15 +348,15 @@ NSString *const kResultsView = @"ResultsView";
         NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDualsLower[i]];
         [self.arrayOfDualsLower addObject:tempNumber];
     }
-    if (!self.arrayOfDualsHigher) {
-        self.arrayOfDualsHigher = [[NSMutableArray alloc] init];
+    if (!self.arrayOfDualsUpper) {
+        self.arrayOfDualsUpper = [[NSMutableArray alloc] init];
     }
     else{
-        [self.arrayOfDualsHigher  removeAllObjects];
+        [self.arrayOfDualsUpper  removeAllObjects];
     }
     for (int i = 0; i < rows+ cols ; ++i) {
-        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDualsHigher[i]];
-        [self.arrayOfDualsHigher addObject:tempNumber];
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfDualsUpper[i]];
+        [self.arrayOfDualsUpper addObject:tempNumber];
     }
     
     if (!self.arrayOfDualsOfConstraints) {
@@ -346,12 +380,32 @@ NSString *const kResultsView = @"ResultsView";
         [self.arrayOfDualsOfVariables addObject:self.arrayOfDuals[i]];
     }
     
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    
     //Logging the values of the variables and constraints
+    
+    REAL cValueOfInfinite;
+    REAL negCValueOfInfinite;
+    
+    cValueOfInfinite = get_infinite(lp);
+    negCValueOfInfinite = -(get_infinite(lp));
+    NSNumber *valueOfInfinite = [NSNumber numberWithDouble:cValueOfInfinite];
+    NSNumber *negValueOfInfinite = [NSNumber numberWithDouble:negCValueOfInfinite];
+    
+    NSLog(@"The value of infinite for the given system is %@", valueOfInfinite);
+    NSLog(@"The value of infinite for the given system is %@", negValueOfInfinite);
+
     
     NSNumberFormatter *formatForDecimals = [[NSNumberFormatter alloc] init];
     [formatForDecimals setMaximumFractionDigits:4];
     [formatForDecimals setMinimumFractionDigits:2];
     [formatForDecimals setMinimumIntegerDigits:1];
+    
+    NSNumberFormatter *formatForScientific= [[NSNumberFormatter alloc] init];
+    [formatForScientific setNumberStyle:NSNumberFormatterScientificStyle];
+    [formatForScientific setMaximumFractionDigits:1];
+    [formatForScientific setRoundingMode:NSNumberFormatterRoundHalfDown];
+    [formatForScientific setExponentSymbol:@"e"];
     
     NSLog(@"\n");
     
@@ -362,63 +416,194 @@ NSString *const kResultsView = @"ResultsView";
     
     //Logging the value of variables
     for (int i = 0; i < cols; ++i) {
-        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfVariableValues[i]];
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfVariableValues[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+
+        }
         NSLog(@"Tha value of Variable %@ is %@", self.arrayOfVariableNames[i], tempString);
     }
     
     NSLog(@"\n");
     
     //Logging the value of constraints
+    
     for (int i = 0; i < rows; ++i) {
-        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfConstraintValues[i]];
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfConstraintValues[i];
         
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+
+        }
         NSLog(@"The value of %@ is %@", self.arrayOfConstraintNames[i], tempString);
     }
     
     NSLog(@"\n");
     
+    //        Logging the lower objective function limit;
     
-//    for (int i = 0; i < cols; ++i) {
-//        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfObjectiveLower[i]];
-//        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfObjectiveHigher[i]];
-//        
-//        NSLog(@"The lower value of the coeeficient of %@ is %@", self.arrayOfVariableNames[i], tempStringA);
-//        NSLog(@"The higher value of the coefficient of %@ is %@", self.arrayOfVariableNames[i], tempStringB);
-//    }
+    for (int i = 0; i < cols; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfObjectiveLower[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        NSLog(@"The lower value of the coeeficient of %@ is %@", self.arrayOfVariableNames[i], tempString);
+    }
     
-//    NSLog(@"\n");
+    //       Logging the upper objective function limit;
+    NSLog(@"\n");
+    
+    for (int i = 0; i < cols; ++i) {
+        NSString *tempString;
+        NSNumber *tempNumber;
+        tempNumber = self.arrayOfObjectiveUpper[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        NSLog(@"The Upper value of the coefficient of %@ is %@", self.arrayOfVariableNames[i], tempString);
+    }
+    
+    
+    NSLog(@"\n");
     
     //Logging the reduced cost of constratints
     
     for (int i = 0; i < rows; ++i) {
-        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfDuals[i]];
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDuals[i];
+         if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        
         NSLog(@"The reduced cost of %@ is %@", self.arrayOfConstraintNames[i],tempString);
     }
     
     NSLog(@"\n");
     
     //Logging the lower value of reduced cost of constratints
-
+    
     
     for (int i = 0; i < rows; ++i) {
-        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfDualsLower[i]];
-        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempStringA);
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        
+        tempNumber = self.arrayOfDualsLower[i];
+        if ([tempNumber doubleValue] == [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <=[negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        
+        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempString);
     }
     
     NSLog(@"\n");
     
     //Logging the upper value of reduced cost of constratints
-
+    
     for (int i = 0; i < rows; ++i) {
-        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfDualsHigher[i]];
-        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempStringB);
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDualsUpper[i];
+        if ([tempNumber doubleValue] >= ([valueOfInfinite doubleValue])) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= ([negValueOfInfinite doubleValue])){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        
+        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfConstraintNames[i], tempString);
     }
     
     NSLog(@"\n");
+    
     //Logging the value of the reduced costs of variables
     
     for (int i = 0; i <cols; ++i) {
-        NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfDuals[rows+i]];
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDuals[i+rows];
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
         NSLog(@"The reduced cost of %@ is %@", self.arrayOfVariableNames[i],tempString);
     }
     
@@ -428,15 +613,47 @@ NSString *const kResultsView = @"ResultsView";
     
     
     for (int i = 0; i <cols; ++i) {
-        NSString *tempStringA = [formatForDecimals stringFromNumber:self.arrayOfDualsLower[rows+i]];
-        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempStringA);
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDualsLower[rows+i];
+        double tempDouble = [tempNumber doubleValue];
+        if (tempDouble >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if (tempDouble <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if(tempDouble >= 10000000000.0 || tempDouble<= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+            NSLog(@"it's neither");
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        
+        NSLog(@"The lower limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempString);
     }
-    //Logging the higher reduced cost of variables
+    
+    //Logging the Upper reduced cost of variables
     NSLog(@"\n");
     
     for (int i = 0; i <cols; ++i) {
-        NSString *tempStringB = [formatForDecimals stringFromNumber:self.arrayOfDualsHigher[rows+i]];
-        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempStringB);
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDualsUpper[rows+i];
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        NSLog(@"The upper limit of reduced cost of %@ is %@", self.arrayOfVariableNames[i], tempString);
     }
     
     

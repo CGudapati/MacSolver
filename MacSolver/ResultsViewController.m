@@ -7,7 +7,6 @@
 //
 
 #import "ResultsViewController.h"
-#import "ScratchWindowController.h"
 
 @interface ResultsViewController ()
 

@@ -17,16 +17,34 @@
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintValues;
 @property (nonatomic, strong) NSMutableArray *arrayOfConstraintNames;
 @property (nonatomic, strong) NSMutableArray *arrayOfObjectiveUpper;
-@property (nonatomic, strong) NSMutableArray  *arrayOfObjectiveLower;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveLower;
 @property (nonatomic, strong) NSMutableArray *arrayOfDuals;
 @property (nonatomic, strong) NSMutableArray *arrayOfDualsLower;
 @property (nonatomic, strong) NSMutableArray *arrayOfDualsUpper;
-@property (nonatomic, strong) NSMutableArray *arrayOfDualsOfVariables;
-@property (nonatomic, strong) NSMutableArray *arrayOfDualsOfConstraints;
 @property (nonatomic, strong) NSMutableArray *arrayOfObjectiveCoefficients;
 @property (nonatomic, strong) NSMutableArray *arrayOfRHSValues;
-@property (nonatomic, strong) NSMutableArray *arratOfSlackValues;
+@property (nonatomic, strong) NSMutableArray *arrayOfSlackValues;
 
+@property (nonatomic, strong) NSMutableArray *arrayOfVariableValuesStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfConstraintValuesStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveUpperStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveLowerStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsLowerStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfDualsUpperStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfObjectiveCoefficientsStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfRHSValuesStrings;
+@property (nonatomic, strong) NSMutableArray *arrayOfSlackValuesStrings;
+
+//For variables
+
+@property (nonatomic, strong)  NSMutableArray *arrayOfVariableDuals;
+@property (nonatomic, strong) NSMutableArray *arrayOfVariablesDualsFrom;
+@property (nonatomic, strong) NSMutableArray *arrayOfVariablesDualsTill;
+
+@property (nonatomic, strong)  NSMutableArray *arrayOfConstraintDuals;
+@property (nonatomic, strong) NSMutableArray *arrayOfConstraintDualsFrom;
+@property (nonatomic, strong) NSMutableArray *arrayOfConstraintDualsTill;
 
 @end
 
@@ -87,6 +105,9 @@ NSString *const kResultsView = @"ResultsView";
         self.myResultsViewController.variablesTableView.delegate = self;
         self.myResultsViewController.variablesTableView.dataSource = self;
         [self.myResultsViewController.variablesTableView reloadData];
+        self.myResultsViewController.constraintsTableView.delegate = self;
+        self.myResultsViewController.constraintsTableView.dataSource = self;
+        [self.myResultsViewController.constraintsTableView reloadData];
     }
     
 }
@@ -178,7 +199,7 @@ NSString *const kResultsView = @"ResultsView";
     REAL cArrayOfDualsUpper[1+cols+rows];
     REAL cArrayOfObjectiveCoefficients[1+cols];
     REAL cArrayOfRHSValues[rows];
-    
+    REAL cArrayOfSlackValues[rows-1];
     
     
     //Get the names of the variables
@@ -359,42 +380,24 @@ NSString *const kResultsView = @"ResultsView";
         [self.arrayOfDualsUpper addObject:tempNumber];
     }
     
-    if (!self.arrayOfDualsOfConstraints) {
-        self.arrayOfDualsOfConstraints = [[NSMutableArray alloc] init];
+    
+    //Getting the value of slacks
+    if (!self.arrayOfSlackValues) {
+        self.arrayOfSlackValues = [[NSMutableArray alloc] init];
     }
     else{
-        [self.arrayOfDualsOfConstraints removeAllObjects];
+        [self.arrayOfSlackValues removeAllObjects];
     }
-    
     for (int i = 0; i < rows; ++i) {
-        [self.arrayOfDualsOfConstraints addObject:self.arrayOfDuals[i]];
+        cArrayOfSlackValues[i] = cArrayOfRHSValues[i+1] - cArrayOfConstraintValues[i];
+        //        printf("Value of CArrayOfSlackvalues: %f", cArrayOfSlackValues[i]);
+        NSNumber *tempNumber = [NSNumber numberWithDouble:cArrayOfSlackValues[i]];
+        [self.arrayOfSlackValues addObject:tempNumber];
     }
     
-    if (!self.arrayOfDualsOfVariables) {
-        self.arrayOfDualsOfVariables = [[NSMutableArray alloc] init];
-    }
-    else{
-        [self.arrayOfDualsOfVariables removeAllObjects];
-    }
-    for (int i = rows; i < rows+cols; ++i) {
-        [self.arrayOfDualsOfVariables addObject:self.arrayOfDuals[i]];
-    }
     
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     
-    //Logging the values of the variables and constraints
     
-    REAL cValueOfInfinite;
-    REAL negCValueOfInfinite;
-    
-    cValueOfInfinite = get_infinite(lp);
-    negCValueOfInfinite = -(get_infinite(lp));
-    NSNumber *valueOfInfinite = [NSNumber numberWithDouble:cValueOfInfinite];
-    NSNumber *negValueOfInfinite = [NSNumber numberWithDouble:negCValueOfInfinite];
-    
-    NSLog(@"The value of infinite for the given system is %@", valueOfInfinite);
-    NSLog(@"The value of infinite for the given system is %@", negValueOfInfinite);
-
     
     NSNumberFormatter *formatForDecimals = [[NSNumberFormatter alloc] init];
     [formatForDecimals setMaximumFractionDigits:4];
@@ -406,6 +409,356 @@ NSString *const kResultsView = @"ResultsView";
     [formatForScientific setMaximumFractionDigits:1];
     [formatForScientific setRoundingMode:NSNumberFormatterRoundHalfDown];
     [formatForScientific setExponentSymbol:@"e"];
+    REAL cValueOfInfinite;
+    REAL negCValueOfInfinite;
+    
+    cValueOfInfinite = get_infinite(lp);
+    negCValueOfInfinite = -(get_infinite(lp));
+    NSNumber *valueOfInfinite = [NSNumber numberWithDouble:cValueOfInfinite];
+    NSNumber *negValueOfInfinite = [NSNumber numberWithDouble:negCValueOfInfinite];
+    
+    NSLog(@"The value of infinite for the given system is %@", valueOfInfinite);
+    NSLog(@"The value of infinite for the given system is %@", negValueOfInfinite);
+    
+    //Converting the values to arrays for table view display
+    
+    //Converting the variable Values to Strings
+    
+    if (!self.arrayOfVariableValuesStrings) {
+        self.arrayOfVariableValuesStrings    = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfVariableValuesStrings removeAllObjects];
+    }
+    
+    for (int i = 0; i < [self.arrayOfVariableValues count]; ++i) {
+        
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfVariableValues[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+        }
+        [self.arrayOfVariableValuesStrings addObject:tempString];
+    }
+    
+    //Converting the arrayOfConstraintValues to string
+    
+    if (!self.arrayOfConstraintValuesStrings) {
+        self.arrayOfConstraintValuesStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfConstraintValuesStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfConstraintValues count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfConstraintValues[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfConstraintValuesStrings addObject:tempString];
+    }
+    
+    
+    //Converting the arrayOfobjectiveLower to strings
+    
+    if (!self.arrayOfObjectiveLowerStrings) {
+        self.arrayOfObjectiveLowerStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfObjectiveLowerStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfObjectiveLower count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfObjectiveLower[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfObjectiveLowerStrings addObject:tempString];
+    }
+    
+    //Converting the arrayOfObjectiveUpper to strings
+    
+    
+    if (!self.arrayOfObjectiveUpperStrings) {
+        self.arrayOfObjectiveUpperStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfObjectiveUpperStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfObjectiveUpper count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfObjectiveUpper[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfObjectiveUpperStrings addObject:tempString];
+    }
+    
+    //    converting the arrayOfDuals to strings
+    
+    if (!self.arrayOfDualsStrings) {
+        self.arrayOfDualsStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfDuals count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDuals[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfDualsStrings addObject:tempString];
+    }
+    
+    //    Converting the arrayOfDualsLower to strings;
+    if (!self.arrayOfDualsLowerStrings) {
+        self.arrayOfDualsLowerStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsLowerStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfDualsLower count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDualsLower[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfDualsLowerStrings addObject:tempString];
+    }
+    
+    
+    //    Convertin the arrayOfDualsUpper to Strings
+    if (!self.arrayOfDualsUpperStrings) {
+        self.arrayOfDualsUpperStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfDualsUpperStrings removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfDualsUpper count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfDualsUpper[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfDualsUpperStrings addObject:tempString];
+    }
+    
+    
+    //    Converting the  arrayOfObjectiveCoefficients to Strings;
+    
+    if (!self.arrayOfObjectiveCoefficientsStrings) {
+        self.arrayOfObjectiveCoefficientsStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfObjectiveCoefficientsStrings   removeAllObjects];
+    }
+    for (int i = 1; i < [self.arrayOfObjectiveCoefficients count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfObjectiveCoefficients[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfObjectiveCoefficientsStrings addObject:tempString];
+    }
+    
+    //    converting the arrayOfRHSValues to strings;
+    
+    if (!self.arrayOfRHSValuesStrings) {
+        self.arrayOfRHSValuesStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfRHSValuesStrings   removeAllObjects];
+    }
+    for (int i = 1; i < [self.arrayOfRHSValues count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfRHSValues[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfRHSValuesStrings addObject:tempString];
+    }
+    
+    
+    
+    //    coverting the  arrayOfSlackValues to strings;
+    
+    if (!self.arrayOfSlackValuesStrings ) {
+        self.arrayOfSlackValuesStrings = [[NSMutableArray alloc] init];
+    }
+    else{
+        [self.arrayOfSlackValuesStrings   removeAllObjects];
+    }
+    for (int i = 0; i < [self.arrayOfSlackValues count]; ++i) {
+        NSString *tempString = [[NSString alloc] init];
+        NSNumber *tempNumber = [[NSNumber alloc] init];
+        tempNumber = self.arrayOfSlackValues[i];
+        
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+            tempString = @"∞";
+        }
+        else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
+            tempString = @"-∞";
+        }
+        else if([tempNumber doubleValue] >= 10000000000.0 || [tempNumber doubleValue] <= -100000000.0){
+            tempString = [formatForScientific stringFromNumber:tempNumber];
+        }
+        else{
+            tempString = [formatForDecimals stringFromNumber:tempNumber];
+            
+        }
+        [self.arrayOfSlackValuesStrings addObject:tempString];
+    }
+    
+    
+    //Getting the value of arrayOfVarDuals
+    
+    NSRange rangeOfVariableValues = NSMakeRange(rows, cols);
+    
+    NSArray *immutableArrayOfDualsStrings = [self.arrayOfDualsStrings copy];
+    NSArray *immutableArrayOfVarDualStrings = [immutableArrayOfDualsStrings subarrayWithRange:rangeOfVariableValues];
+    self.arrayOfVariableDuals = [immutableArrayOfVarDualStrings mutableCopy];
+    
+    //Getting The value of ArrayOfVarDualsFrom
+    
+    NSArray *immutableArrayOfDualsFromStrings = [self.arrayOfDualsLowerStrings copy];
+    NSArray *immutableArrayOfVarDualsFromStrings = [immutableArrayOfDualsFromStrings subarrayWithRange:rangeOfVariableValues];
+    self.arrayOfVariablesDualsFrom = [immutableArrayOfVarDualsFromStrings mutableCopy];
+    
+    //Getting The value of ArrayOfVarDualsTill
+    
+    
+    NSArray *immutableArrayOfDualsTillStrings = [self.arrayOfDualsUpperStrings copy];
+    NSArray *immutableArrayOfVarDualsTillStrings = [immutableArrayOfDualsTillStrings subarrayWithRange:rangeOfVariableValues];
+    self.arrayOfVariablesDualsTill = [immutableArrayOfVarDualsTillStrings mutableCopy];
+    
+    NSRange rangeOfConstraintsValues = NSMakeRange(0, rows);
+    
+    NSArray *immutableArrayOfConsDualStrings = [immutableArrayOfDualsStrings subarrayWithRange:rangeOfConstraintsValues];
+    self.arrayOfConstraintDuals = [immutableArrayOfConsDualStrings mutableCopy];
+    
+    //Getting The value of ArrayOfVarDualsFrom
+    
+    NSArray *immutableArrayOfConsDualsFromStrings = [immutableArrayOfDualsFromStrings subarrayWithRange:rangeOfConstraintsValues];
+    self.arrayOfConstraintDualsFrom = [immutableArrayOfConsDualsFromStrings mutableCopy];
+    
+    //Getting The value of ArrayOfVarDualsTill
+    
+    
+    NSArray *immutableArrayOfConsDualsTillStrings = [immutableArrayOfDualsTillStrings subarrayWithRange:rangeOfConstraintsValues];
+    self.arrayOfConstraintDualsTill = [immutableArrayOfConsDualsTillStrings mutableCopy];
+    
+    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    
+    //Logging the values of the variables and constraints
     
     NSLog(@"\n");
     
@@ -431,7 +784,7 @@ NSString *const kResultsView = @"ResultsView";
         }
         else{
             tempString = [formatForDecimals stringFromNumber:tempNumber];
-
+            
         }
         NSLog(@"Tha value of Variable %@ is %@", self.arrayOfVariableNames[i], tempString);
     }
@@ -456,7 +809,7 @@ NSString *const kResultsView = @"ResultsView";
         }
         else{
             tempString = [formatForDecimals stringFromNumber:tempNumber];
-
+            
         }
         NSLog(@"The value of %@ is %@", self.arrayOfConstraintNames[i], tempString);
     }
@@ -517,7 +870,7 @@ NSString *const kResultsView = @"ResultsView";
         NSString *tempString = [[NSString alloc] init];
         NSNumber *tempNumber = [[NSNumber alloc] init];
         tempNumber = self.arrayOfDuals[i];
-         if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
+        if ([tempNumber doubleValue] >= [valueOfInfinite doubleValue]) {
             tempString = @"∞";
         }
         else if ([tempNumber doubleValue] <= [negValueOfInfinite doubleValue]){
@@ -671,8 +1024,23 @@ NSString *const kResultsView = @"ResultsView";
         NSString *tempString = [formatForDecimals stringFromNumber:self.arrayOfRHSValues[i]];
         NSLog(@"The RHS value of %@ is %@", self.arrayOfConstraintNames[i-1], tempString );
     }
-    delete_lp(lp);
+    
+    NSLog(@"\n\n Arrays logging \n\n");
+    NSLog(@"Tha value of arrayOfVariableValuesStrings is %@", self.arrayOfVariableValuesStrings);
+    NSLog(@"Tha value of arrayOfConstraintValuesStrings is %@", self.arrayOfConstraintValuesStrings);
+    NSLog(@"Tha value of arrayOfObjectiveUpperStrings is  %@", self.arrayOfObjectiveUpperStrings);
+    NSLog(@"Tha value of arrayOfObjectiveLowerStrings is %@", self.arrayOfObjectiveLowerStrings);
+    NSLog(@"Tha value of arrayOfDualsStrings is %@", self.arrayOfDualsStrings );
+    NSLog(@"Tha value of arrayOfDualsLowerStrings is %@", self.arrayOfDualsLowerStrings);
+    NSLog(@"Tha value of arrayOfDualsUpperStrings is %@", self.arrayOfDualsUpperStrings );
+    NSLog(@"Tha value of arrayOfObjectiveCoefficientsStrings is %@", self.arrayOfObjectiveCoefficientsStrings);
+    NSLog(@"Tha value of arrayOfRHSValuesStrings is %@", self.arrayOfRHSValuesStrings);
+    NSLog(@"Tha value of arrayOfSlackValues is %@",self.arrayOfSlackValues );
+    NSLog(@"Tha value of arrayOfSlackValuesStrings is %@",self.arrayOfSlackValuesStrings );
+    
+    
     free(cFilePath);
+    delete_lp(lp);
     
     //Enables the show results button
     
@@ -701,11 +1069,68 @@ NSString *const kResultsView = @"ResultsView";
 
 //implementing the TableView for Variables and their values
 -(NSInteger) numberOfRowsInTableView:(NSTableView *)tableView{
-    return [self.arrayOfVariableNames count];
+    if(tableView.tag == 0 ){
+        return [self.arrayOfVariableNames count];
+        
+    }
+    else{
+        NSLog(@"\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////");
+        return [self.arrayOfConstraintNames count];
+    }
 }
 
 -(id) tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    return [([tableColumn.identifier isEqualToString:@"variables"] ? self.arrayOfVariableNames : self.arrayOfVariableValues) objectAtIndex:row];
+    if (tableView.tag == 0) {
+        if ([tableColumn.identifier isEqualToString:@"variables"]) {
+            return self.arrayOfVariableNames[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"optimalValues"]){
+            return self.arrayOfVariableValuesStrings[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"reducedCost"]){
+            return self.arrayOfVariableDuals[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"dualFrom"]){
+            return self.arrayOfVariablesDualsFrom[row]		;
+        }
+        else if ([tableColumn.identifier isEqualToString:@"dualTill"]){
+            return self.arrayOfVariablesDualsTill[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"coeffValue"]){
+            return self.arrayOfObjectiveCoefficientsStrings[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"coeffFrom"]){
+            return self.arrayOfObjectiveLowerStrings[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"coeffTo"]){
+            return self.arrayOfObjectiveUpperStrings[row];
+        }
+    }
+    else if (tableView.tag == 1){
+        
+        if ([tableColumn.identifier isEqualToString:@"constraints"]) {
+            return self.arrayOfConstraintNames[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"optimalValues"]){
+            return self.arrayOfConstraintValuesStrings[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"rhsValue"]){
+            return self.arrayOfRHSValuesStrings[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"slackValue"]){
+            return self.arrayOfSlackValues[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"reducedCost"]){
+            return self.arrayOfConstraintDuals[row];
+        }
+        else if ([tableColumn.identifier isEqualToString:@"dualFrom"]){
+            return self.arrayOfConstraintDualsFrom[row]	;
+        }
+        else if ([tableColumn.identifier isEqualToString:@"dualTill"]){
+            return self.arrayOfConstraintDualsTill[row];
+        }
+    }
+    return @"w";
     
 }
 

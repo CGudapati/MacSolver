@@ -16,6 +16,7 @@
 
 @property (weak) IBOutlet NSTableView *variablesTableView;
 
+@property (weak) IBOutlet NSTableView *constraintsTableView;
 
 
 

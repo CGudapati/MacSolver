@@ -35,6 +35,8 @@
 
 @property int returnValue;
 @property float optimizedValue;
-@property long numberOfIterrations;
+@property double timeElapsed;
+@property long long totalIterations;
+@property long totalNodes;
 
 @end

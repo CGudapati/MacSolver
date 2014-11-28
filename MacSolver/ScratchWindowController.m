@@ -149,7 +149,7 @@ NSString *const kResultsView = @"ResultsView";
     const char *constCFilePath = [filePathModified UTF8String];
     char * cFilePath = strdup(constCFilePath);
     
-    lp = read_LP( cFilePath, NORMAL, "test model");
+    lp = read_LP(   cFilePath, NORMAL, "test model");
     
     if(lp == NULL) {
         NSLog(@"Unable to create LP");

@@ -54,6 +54,7 @@
 		C26B517B19BCA22C00D66D5E /* MacSolverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacSolverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C26B518019BCA22C00D66D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C26B518119BCA22C00D66D5E /* MacSolverTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacSolverTests.m; sourceTree = "<group>"; };
+		C2BF599819F8A012003FE1F5 /* MacSolver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MacSolver.entitlements; sourceTree = "<group>"; };
 		C2CBD94019BD3176001F1B3D /* lp_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_utils.h; sourceTree = "<group>"; };
 		C2CBD94119BD3176001F1B3D /* lp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_types.h; sourceTree = "<group>"; };
 		C2CBD94219BD3176001F1B3D /* lp_Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lp_Hash.h; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		C26B516A19BCA22C00D66D5E /* MacSolver */ = {
 			isa = PBXGroup;
 			children = (
+				C2BF599819F8A012003FE1F5 /* MacSolver.entitlements */,
 				C234826E19C521D400DE1338 /* ModelEntryTextView.h */,
 				C234826F19C521D400DE1338 /* ModelEntryTextView.m */,
 				C2234E2319BD4A7D00949E46 /* ScratchWindowController.h */,
@@ -224,6 +226,11 @@
 				TargetAttributes = {
 					C26B516719BCA22C00D66D5E = {
 						CreatedOnToolsVersion = 6.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					C26B517A19BCA22C00D66D5E = {
 						CreatedOnToolsVersion = 6.0;

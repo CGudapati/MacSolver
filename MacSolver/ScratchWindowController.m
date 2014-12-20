@@ -144,7 +144,10 @@ NSString *const kResultsView = @"ResultsView";
     self.returnValue = 0; //setting the return value of solve() to zero. Will be calling different alertsheets
     
     NSString *filePathNSString = [fileURL absoluteString];
-    NSString *filePathModified = [filePathNSString substringFromIndex:7];
+    NSRange varRange = [filePathNSString rangeOfString:@"/var/"];
+    NSString *filePathModified = [filePathNSString substringFromIndex:varRange.location];
+    NSLog(@"%@", filePathModified);
+
     
     const char *constCFilePath = [filePathModified UTF8String];
     char * cFilePath = strdup(constCFilePath);

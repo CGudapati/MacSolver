@@ -12,12 +12,8 @@
 
 
 @interface ScratchWindowController : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
-@property(nonatomic, assign) NSViewController *myScratchViewController;
+
 @property (strong) IBOutlet NSWindow *modelWindow;
-
-@property(nonatomic, strong) ModelEntryViewController *myModelEntryViewController;
-@property(nonatomic, strong) ResultsViewController *myResultsViewController;
-
 @property (weak) IBOutlet NSView *scratchView;
 - (IBAction)solve:(NSButton *)sender;
 - (IBAction)showResults:(NSButton *)sender;
@@ -26,7 +22,9 @@
 @property (weak) IBOutlet NSButton *showResultsButton;
 @property (weak) IBOutlet NSButton *backToModelButton;
 
-
+@property(nonatomic, assign) NSViewController *myScratchViewController;
+@property(nonatomic, strong) ModelEntryViewController *myModelEntryViewController;
+@property(nonatomic, strong) ResultsViewController *myResultsViewController;
 
 @property (nonatomic, strong) NSArray *constArrayOfVariableNames;
 @property  (nonatomic, strong) NSArray *constArrayOfVariableValues;

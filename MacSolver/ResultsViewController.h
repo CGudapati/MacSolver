@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+
 @class ScratchWindowController;
 
 
@@ -21,6 +22,7 @@
 @property (weak) IBOutlet NSTextField *totalIterationsLabel;
 
 @property (weak) IBOutlet NSTextField *numberOfNodesLabel;
+
 @property (weak) IBOutlet NSTextField *timeElapsedLabel;
 
 @end
